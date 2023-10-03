@@ -1,0 +1,24 @@
+@import '../../styles/utilities/utilities';
+
+.supersets {
+  @extend %vertical-start;
+  width: 100%;
+}
+
+.super-set {
+  @extend %vertical-start;
+  width: 100%;
+  padding: 0 24px;
+  margin-bottom: 24px;
+
+  &__header {
+    @extend %horizontal-center;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  &__movement-list {
+    @extend %vertical-start;
+    width: 100%;
+  }
+}

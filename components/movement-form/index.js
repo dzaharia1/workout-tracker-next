@@ -1,3 +1,3 @@
-import MovementForm from "./movementForm";
+import NewMovementForm from "./NewMovementForm";
 
-export default MovementForm
+export default NewMovementForm

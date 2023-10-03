@@ -2,9 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { Router, useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Card from '../components/card'
-import MovementForm from '../components/movement-form'
+import styles from '../styles/Home.module.scss'
+import SetList from '../components/setList'
 
 export default function Home({ workoutData, routineData }) {
   const router = useRouter();
@@ -22,13 +21,7 @@ export default function Home({ workoutData, routineData }) {
       </Head>
 
       <main className={styles.main}>
-
-        <div className={styles.grid}>
-          {routineData.map((routine, i) => (<Card key={i * 10} url="www.danzaharia.com" title={routine.routine_name} description={routine.to_char} />))}
-          {workoutData.map((movement, i) => (<Card key={i} url="www.zach.coffee" title={movement.movement_name} description={movement.to_char} />))}
-        </div>
-
-        <MovementForm refreshData={refreshData}></MovementForm>
+        <SetList movements={workoutData} />
 
       </main>
     </div>
@@ -36,7 +29,7 @@ export default function Home({ workoutData, routineData }) {
 }
 
 export async function getStaticProps() {
-  const workoutDataRes = await fetch(`http://localhost:3333/movements/4`, {accept: "application/json"});
+  const workoutDataRes = await fetch(`http://localhost:3333/movements/5`, {accept: "application/json"});
   const workoutData = await workoutDataRes.json();
   
   const routineDataRes = await fetch(`http://localhost:3333/routines`, {accept: "application/json"});

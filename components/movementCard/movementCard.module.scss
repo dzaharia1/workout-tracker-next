@@ -1,0 +1,83 @@
+@import '../../styles/utilities/utilities';
+
+.movement-card {
+  @extend %vertical-start;
+  padding: 24px;
+  border: 1px lightgrey solid;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
+  margin: 0 0 1rem;
+  width: 100%;
+
+  &__header {
+    @extend %horizontal-center;
+    width: 100%;
+    margin-bottom: 1rem;
+    
+    h2 {
+      margin-right: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__attributes {
+    @extend %horizontal-start;
+    width: 100%;
+  }
+
+  &__attribute {
+    width: 30px;
+    margin-right: 2rem;
+
+    &--date {
+      flex: 1;
+    }
+  }
+
+  &__button-row {
+    @extend %horizontal-center;
+    justify-content: flex-end;
+    flex: 1;
+
+    button {
+      margin-left: 12px;
+    }
+  }
+}
+
+.movement-journal {
+  @extend %vertical-start;
+  flex: 1;
+  overflow-x: visible;
+
+  &__entry {
+    @extend %horizontal-start;
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px lightgray solid;
+  }
+
+  &__journal {
+    width: 100%;
+    flex: 1;
+    overflow-y: scroll;
+  }
+
+  &__button-row {
+    @extend %horizontal-center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 0;
+    overflow: visible;
+
+    button {
+      flex: 1;
+      margin: 0;
+
+      &:first-of-type {
+        margin-right: 12px;
+      }
+    }
+  }
+}
