@@ -2,7 +2,7 @@ import styles from './IconButton.module.scss'
 
 const IconButton = ({icon, clickHandler, size}) => {
     return <button 
-        className={styles["icon-button"]}
+        className={`${styles["icon-button"]} icon-button`}
         style={{
             backgroundImage: `url(${icon})`,
             width: `${size}px` || "24px",

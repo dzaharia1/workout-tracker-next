@@ -1,3 +1,5 @@
+@import './variables';
+
 // uniformly add alpha to a color
 @function transparentize ($color, $transparency: .7) {
   @return rgba($color, $transparency);

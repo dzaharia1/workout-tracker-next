@@ -1,0 +1,123 @@
+@import '../../styles/utilities/utilities';
+
+$menu-height: 95vh;
+$menu-width: 70vw;
+
+.navigation {
+    &__complete-button {}
+
+    &__header-bar {
+        @extend %horizontal-center;
+        justify-content: space-between;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        padding: 0px $padding;
+        height: $header-height;
+        background-color: white;
+    
+        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
+
+        &-section,
+        h1 {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 22px;
+            text-align: center;
+        }
+
+        div:last-of-type {
+            @extend %horizontal-center;
+            justify-content: flex-end;
+        }
+
+        .icon-button {
+            margin-right: $padding;
+        }
+    }
+
+    &__menu {
+        @extend %vertical-start;
+        justify-content: flex-start;
+        
+        position: fixed;
+        top: calc((100vh - $menu-height) / 2);
+        left: 5vw;
+        width: $menu-width;
+        height: $menu-height;
+        
+        border-radius: 6px;
+        padding: $padding;
+        
+        background-color: transparentize(white, .92);
+        backdrop-filter: $backdropFilter;
+        box-shadow: $box-shadow;
+        
+        transform: scale(.7) translateX(-180px);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform $easing,
+            opacity $easing,
+            visibility $easing;
+
+        &--visible {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        div {
+            @extend %horizontal-center;
+            button {
+                margin-right: 16px;
+            }
+        }
+
+        ul {
+            width: 100%;
+            padding-top: $padding;
+        }
+
+        &-item {
+            @extend %horizontal-center;
+            width: 100%;
+            margin-bottom: 24px;
+
+            a {
+                flex: 1;
+                font-weight: 600;
+            }
+        }
+
+        &-scrim {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            background-color: $scrim__background-color;
+            backdrop-filter: $scrim__backdrop-filter;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform $easing,
+                opacity $easing,
+                visibility $easing;
+
+            &--visible {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__completed-indicator {
+        background-color: mediumseagreen;
+        color: white;
+        border-radius: 4px;
+        padding: 4px 16px;
+        font-size: 12px;
+    }
+}

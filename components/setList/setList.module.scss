@@ -3,13 +3,14 @@
 .supersets {
   @extend %vertical-start;
   width: 100%;
+  margin-top: $header-height + $padding;
 }
 
 .super-set {
   @extend %vertical-start;
   width: 100%;
-  padding: 0 24px;
-  margin-bottom: 24px;
+  padding: 0 $padding;
+  margin-bottom: $padding;
 
   &__header {
     @extend %horizontal-center;
@@ -20,5 +21,18 @@
   &__movement-list {
     @extend %vertical-start;
     width: 100%;
+  }
+
+  &__complete-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 14px;
+    border: 2px black solid;
+    margin-left: 12px;
+
+    &--complete {
+      @extend .super-set__complete-indicator;
+      background-color: black;
+    }
   }
 }

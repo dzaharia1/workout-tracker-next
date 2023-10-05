@@ -36,3 +36,7 @@ h4 {
 p {
   font-size: 14px;
 }
+
+main {
+  @extend %vertical-start;
+}

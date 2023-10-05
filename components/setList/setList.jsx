@@ -3,8 +3,9 @@ import setList from '.';
 import MovementCard from '../movementCard';
 import styles from './setList.module.scss'
 
-const SetList = ({movements}) => {
+const SetList = ({movements, today}) => {
     let superSets = [];
+    console.log(today);
     
     for (let movement of movements) {
         const superSetId = movement.set_id - 1;
@@ -22,6 +23,9 @@ const SetList = ({movements}) => {
             return <div className={styles["super-set"]} key={i}>
                 <header className={styles["super-set__header"]}>
                     <h2>Superset {superSet.id}</h2>
+                    {superSet.movements.map((movement, i) => {
+                        return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
+                    })}
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
                     { superSet.movements.map((movement, j) => {

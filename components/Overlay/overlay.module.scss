@@ -1,41 +1,57 @@
 @import '../../styles/utilities/utilities';
-
-$backdropFilter: blur(2px);
+$overlay-width: 90vw;
+$overlay-height: 90vh;
 
 .overlay {
     @extend %vertical-start;
     position: fixed;
-    height: 75vh;
-    bottom: -100vh;
-    left: 0;
-    right: 0;
+    height: $overlay-height;
+    width: $overlay-width;
+    top: calc((100vh - $overlay-height) / 2);
+    left: calc((100vw - $overlay-width) / 2);
+    box-shadow: $box-shadow;
+    opacity: 0;
+    transform: scale(.7);
     visibility: hidden;
     overflow-x: visible;
 
     padding: 24px;
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px;
     background-color: transparentize(white, .92);
     backdrop-filter: $backdropFilter;
-    transition: bottom .2s ease-out;
-
-    .overlay__scrim {
-        background-color: transparentize(#000000, 0);
-        backdrop-filter: blur(0);
-        transition: background-color .2s ease-out;
-    }
+        transition: transform $easing,
+            opacity $easing,
+            visibility $easing;
 
     &--visible {
-        bottom: 0;
+        transform: scale(1);
+        opacity: 1;
         visibility: visible;
+    }
 
-        .overlay__scrim {
-            position: absolute;
-            top: -25vh;
-            left: 0;
-            right: 0;
-            bottom: 75vh;
-            backdrop-filter: $backdropFilter;
-            background-color: transparentize(#000000, .20);
+    &__scrim {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0 !important;
+        
+        opacity: 0;
+
+        background-color: $scrim__background-color;
+        backdrop-filter: $scrim__backdrop-filter;
+        visibility: hidden;
+        transition: opacity $easing,
+            visibility $easing;
+
+        &--visible {
+            transform: scale(1);
+            opacity: 1;
+            visibility: visible;
         }
     }
 
@@ -43,6 +59,12 @@ $backdropFilter: blur(2px);
         @extend %horizontal-center;
         width: 100%;
         padding-bottom: 24px;
+
+        &-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
 
         &-title {
             flex: 1;
