@@ -28,7 +28,7 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
         const reps = document.querySelector(`#reps-input-${movementId}`).value;
         const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${weight}/${sets}/${reps}/${instruction}`;
 
-        console.log(url);
+        console.log(instruction);
         
         fetch(url, {
             method: 'POST'
@@ -78,10 +78,14 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
             { journalData.map((entry, i) => {
                 return <li className={styles["movement-journal__entry"]} key={i}>
                     {/* <p className={styles["movement-journal__date"]}>{entry.completion_date}</p> */}
-                    <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
-                        <p>{entry.to_char}</p>
-                        <h4>logged</h4>
-                    </div>
+                    {entry.instruction ? 
+                        <div className={styles['movement-card__attribute--date']}><span className={styles['movement-card__completed-indicator']}>Instruction</span></div>
+                        :
+                        <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
+                            <p>{entry.to_char}</p>
+                            <h4>logged</h4>
+                        </div>
+                        }
                     <div className={styles["movement-card__attribute"]}>
                         <p>{entry.weight}</p>
                         <h4>lbs</h4>

@@ -5,6 +5,7 @@ import MovementJournal from '../MovementJournal'
 
 const movementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, today, apiUrl, refreshWorkoutData }) => {
     let [movementJournal, setMovementJournal] = useState([]);
+    console.log(instruction)
 
     function loadJournal() {
         const url = `${apiUrl}/journal/movement/${movementId}`;
@@ -35,11 +36,13 @@ const movementCard = ({displayName, slug, instruction, last_logged, weight, sets
         </div>
         <div className={styles["movement-card__attributes"]}>
             {instruction ? 
+                <div className={styles['movement-card__attribute--date']}><span className={styles['movement-card__completed-indicator']}>Instruction</span></div>
+                :
                 <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
                     <p>{ last_logged }</p>
                     <h4>last logged</h4>
                 </div>
-             : <span>Instruction</span>}
+            }
             <div className={styles["movement-card__attribute"]}>
                 <p>{ weight }</p>
                 <h4>lbs</h4>

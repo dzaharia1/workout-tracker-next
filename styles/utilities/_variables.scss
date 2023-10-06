@@ -5,3 +5,11 @@ $scrim__background-color: transparentize(#000000, .6);
 $scrim__backdrop-filter: blur(0);
 $box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
 $easing: .4s cubic-bezier(0.34, 0.21, 0.16, 0.97);
+
+%completed-indicator {
+    background-color: mediumseagreen;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 16px;
+    font-weight: 600;
+}

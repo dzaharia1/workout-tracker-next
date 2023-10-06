@@ -22,6 +22,7 @@ const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
                             reps={movement.num_reps}
                             sets={movement.num_sets}
                             slug={movement.movement_slug}
+                            instruction={movement.instruction}
                             key={j}
                             movementId={movement.movement_id}
                             routineId={routineId}
