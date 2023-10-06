@@ -3,26 +3,7 @@ import setList from '.';
 import MovementCard from '../movementCard';
 import styles from './setList.module.scss'
 
-const SetList = ({movements, today, routineId, databaseUrl}) => {
-    let superSets = [];
-    
-    console.log(movements);
-    
-    console.log('refreshing')
-    for (let movement of movements) {
-        const superSetId = movement.set_id - 1;
-        if (superSets[superSetId] == null) {
-            superSets[superSetId] = {
-                id: movement.set_id,
-                movements: []
-            };
-        }
-        superSets[superSetId].movements.push(movement);
-    }
-    
-    function refreshMovements() {
-        
-    }
+const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
 
     return <section className={styles["supersets"]}>
         { superSets.map((superSet, i) => {
@@ -45,7 +26,8 @@ const SetList = ({movements, today, routineId, databaseUrl}) => {
                             movementId={movement.movement_id}
                             routineId={routineId}
                             today={today}
-                            databaseUrl={databaseUrl} />
+                            apiUrl={apiUrl}
+                            refreshWorkoutData = {refreshWorkoutData} />
                     }) }
                 </ul>
             </div>

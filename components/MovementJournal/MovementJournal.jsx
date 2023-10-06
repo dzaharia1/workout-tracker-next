@@ -2,9 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from './MovementJournal.module.scss';
 import Button from '../Button'
 
-const MovementJournal = ({journalData, movementId, routineId, setCardInfo, databaseUrl, loadJournal}) => {
-    console.log(journalData);
-
+const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUrl, loadJournal, refreshWorkoutData}) => {
     function showEntryForm() {
         let form = document.querySelector(`#entry-form-${movementId}`);
         let buttonRow = document.querySelector(`#button-row-${movementId}`);
@@ -28,16 +26,16 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, datab
         const weight = document.querySelector(`#weight-input-${movementId}`).value;
         const sets = document.querySelector(`#sets-input-${movementId}`).value;
         const reps = document.querySelector(`#reps-input-${movementId}`).value;
-        const url = `${databaseUrl}/journal/addmovement/${movementId}/${routineId}/${weight}/${sets}/${reps}/${instruction}`;
+        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${weight}/${sets}/${reps}/${instruction}`;
 
         console.log(url);
         
         fetch(url, {
             method: 'POST'
         }).then(() => {
-            setCardInfo(instruction, weight, sets, reps);
             hideEntryForm();
             loadJournal();
+            refreshWorkoutData();
         });
 
     }

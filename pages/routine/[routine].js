@@ -6,12 +6,40 @@ import styles from '../../styles/home.module.scss'
 import SetList from '../../components/setList'
 import Navigation from '../../components/Navigation'
 
-export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today }) {
+export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
-  const databaseUrl = `http://localhost:3333`;
+  let [superSets, setSuperSets] = useState([])
+  
+  useEffect(() => {
+    formatWorkoutData()
+  }, [workoutData]);
 
-  const refreshData = () => {
-    router.replace(router.asPath);
+  const formatWorkoutData = (data) => {
+    let updatedSuperSets = [];
+    let rawData = data || workoutData;
+
+    for (let movement of rawData) {
+      const superSetId = movement.set_id - 1;
+      if (updatedSuperSets[superSetId] == null) {
+        console.log(`Found superSet ${movement.set_id}`)
+        updatedSuperSets[superSetId] = {
+          id: movement.set_id,
+          movements: []
+        };
+      }
+      updatedSuperSets[superSetId].movements.push(movement);
+    }
+
+    setSuperSets(updatedSuperSets);
+  }
+
+  const refreshWorkoutData = () => {
+    const url = `${apiUrl}/routine/${thisRoutine.routine_id}`;
+    fetch(url, {accept: "application/json"})
+      .then(data => data.json())
+      .then(data => {
+        superSets = formatWorkoutData(data.movements);
+      })
   }
 
   return (
@@ -26,20 +54,16 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
           routines={routineData}
-          databaseUrl={databaseUrl} />
-        <SetList movements={workoutData} 
+          apiUrl={apiUrl} />
+        <SetList superSets={superSets} 
                  today={today}
                  routineId={ thisRoutine['routine_id'] }
-                 databaseUrl={databaseUrl} />
+                 apiUrl={apiUrl}
+                 refreshWorkoutData = {refreshWorkoutData} />
       </main>
     </div>
   )
 }
-
-// export async function getServerSideProps() {
-//   const routineId = params.routineId;
-//   apiUrl = process.env.apiUrl || `http://localhost:3333`;
-// }
 
 export async function getServerSideProps({params}) {
   const apiUrl = process.env.API_URL || `http://localhost:3333`;
@@ -60,7 +84,7 @@ export async function getServerSideProps({params}) {
     today = data.todaysDate;
   })
 
-  return { props: { workoutData, routineData, thisRoutine, nextRoutine, today } }
+  return { props: { workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl } }
 }
 
 export async function getServerSidePaths() {
