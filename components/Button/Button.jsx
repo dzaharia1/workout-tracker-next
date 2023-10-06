@@ -1,7 +1,12 @@
 import styles from './Button.module.scss'
 
 const Button = ({label, clickHandler, size, id}) => {
-    return <button className={styles["button"]} onClick={clickHandler} id={id}>
+    function click(e) {
+        e.preventDefault();
+        clickHandler()
+    }
+
+    return <button className={styles["button"]} onClick={click} id={id}>
             { label }
     </button>
 }

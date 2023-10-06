@@ -6,8 +6,9 @@ import Image from 'next/image'
 import SetList from '../components/setList'
 import Navigation from '../components/Navigation'
 
-export default function Home({ workoutData, routineData, thisRoutine, nextRoutine }) {
+export default function Home({ workoutData, routineData, today, thisRoutine, nextRoutine }) {
   const router = useRouter();
+  const databaseUrl = `http://localhost:3333`;
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -24,8 +25,12 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
       <main>
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
-          routines={routineData} />
-        <SetList movements={workoutData} />
+          routines={routineData}
+          databaseUrl={databaseUrl} />
+        <SetList movements={workoutData}
+          today={today}
+          routineId={thisRoutine.routine_id}
+          databaseUrl={databaseUrl} />
       </main>
     </div>
   )

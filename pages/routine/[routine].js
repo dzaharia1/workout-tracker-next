@@ -8,6 +8,7 @@ import Navigation from '../../components/Navigation'
 
 export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today }) {
   const router = useRouter();
+  const databaseUrl = `http://localhost:3333`;
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -24,8 +25,12 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
       <main>
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
-          routines={routineData} />
-        <SetList movements={workoutData} today={today} />
+          routines={routineData}
+          databaseUrl={databaseUrl} />
+        <SetList movements={workoutData} 
+                 today={today}
+                 routineId={ thisRoutine['routine_id'] }
+                 databaseUrl={databaseUrl} />
       </main>
     </div>
   )
