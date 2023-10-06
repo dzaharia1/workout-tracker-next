@@ -12,7 +12,7 @@
   &__header {
     @extend %horizontal-center;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
     
     h2 {
       margin-right: 1rem;
@@ -22,17 +22,22 @@
   }
 
   &__attributes {
-    @extend %horizontal-start;
+    @extend %horizontal-center;
     width: 100%;
   }
 
   &__attribute {
-    width: 45px;
+    width: 35px;
     margin-left: 16px;
     text-align: center;
 
     p {
-      margin-bottom: 4px;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    h4 {
+      font-size: 14px;
     }
 
     &:first-of-type {
@@ -57,6 +62,5 @@
 
   &__completed-indicator {
     @extend %completed-indicator;
-    font-size: 12px;
   }
 }

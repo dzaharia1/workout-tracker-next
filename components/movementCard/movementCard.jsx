@@ -21,7 +21,7 @@ const movementCard = ({displayName, slug, instruction, last_logged, weight, sets
         <div className={styles["movement-card__header"]}>
             <h3>{ displayName }</h3>
             <div className={styles["movement-card__button-row"]}>
-                <Overlay onShow={loadJournal} title={`Journal - ${displayName}`} triggerIcon="/img/journal.svg" id={`journal-${slug}`} >
+                <Overlay onShow={loadJournal} title={displayName} triggerIcon="/img/journal.svg" id={`journal-${slug}`} >
                     <MovementJournal journalData={movementJournal}
                                      movementId={movementId}
                                      routineId={routineId}

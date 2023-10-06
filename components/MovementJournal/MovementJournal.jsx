@@ -13,22 +13,28 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     }
 
     function hideEntryForm() {
+        const instruction = document.querySelector(`#instruction-${movementId}`);
+        const weight = document.querySelector(`#weight-input-${movementId}`);
+        const sets = document.querySelector(`#sets-input-${movementId}`);
+        const reps = document.querySelector(`#reps-input-${movementId}`);
         let form = document.querySelector(`#entry-form-${movementId}`);
         let buttonRow = document.querySelector(`#button-row-${movementId}`);
         const formVisibleClass = styles['movement-journal__form--visible'];
         const buttonRowVisibleClass = styles['movement-journal__button-row--visible'];
         form.classList.remove(formVisibleClass);
         buttonRow.classList.add(buttonRowVisibleClass);
+        instruction.checked = false;
+        weight.value = '';
+        sets.value = '';
+        reps.value = '';
     }
 
     function saveEntryForm() {
-        const instruction = document.querySelector(`#instruction-${movementId}`).checked;
-        const weight = document.querySelector(`#weight-input-${movementId}`).value;
-        const sets = document.querySelector(`#sets-input-${movementId}`).value;
-        const reps = document.querySelector(`#reps-input-${movementId}`).value;
-        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${weight}/${sets}/${reps}/${instruction}`;
-
-        console.log(instruction);
+        const instruction = document.querySelector(`#instruction-${movementId}`);
+        const weight = document.querySelector(`#weight-input-${movementId}`);
+        const sets = document.querySelector(`#sets-input-${movementId}`);
+        const reps = document.querySelector(`#reps-input-${movementId}`);
+        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${weight.value}/${sets.value}/${reps.value}/${instruction.checked}`;
         
         fetch(url, {
             method: 'POST'
@@ -42,7 +48,6 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     
 
     return <div className={styles["movement-journal"]}>
-        {/* <form className="movement-journal__add-entry"></form> */}
         <div className={`${styles['movement-journal__button-row']} ${styles['movement-journal__button-row--visible']}`} id={`button-row-${movementId}`}>
             <Button label="Add entry" id={`add-entry-${movementId}`} clickHandler={showEntryForm}/>
             <Button label="Add note" id={`add-note-${movementId}`}/>
@@ -58,15 +63,15 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
             <div className={styles["movement-journal__form-inputs"]}>
                 <label htmlFor="">
                     <input type="number" id={`weight-input-${movementId}`}/>
-                    Lbs
+                    lbs
                 </label>
                 <label htmlFor="">
                     <input type="number" id={`sets-input-${movementId}`}/>
-                    Sets
+                    sets
                 </label>
                 <label htmlFor="">
                     <input type="number" id={`reps-input-${movementId}`}/>
-                    Reps
+                    reps
                 </label>
             </div>
             <div className={styles['movement-journal__form-buttons']}>
@@ -83,7 +88,7 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                         :
                         <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
                             <p>{entry.to_char}</p>
-                            <h4>logged</h4>
+                            <h4>Last logged</h4>
                         </div>
                         }
                     <div className={styles["movement-card__attribute"]}>

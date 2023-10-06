@@ -13,10 +13,6 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
             mode: 'no-cors'
         }).then(data => {
             console.log(data);
-            // console.log(styles['navigation__complete-button'])
-            // const completeButton = document.querySelector(`${styles['navigation__complete-button']}`)
-            // console.log(completeButton);
-            // completeButton.classList.add(styles['navigation__completed-indicator']);
             setRoutineCompleted(true);
         })
     }
@@ -42,7 +38,10 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
         <div className={styles['navigation__header-bar-section']}>
             <IconButton icon="/img/menu.svg" clickHandler={toggleMenu} />
         </div>
-        <h1>{thisRoutine.routine_name}</h1>
+        <div>
+            <h1>{thisRoutine.routine_name}</h1>
+            {nextRoutine.routine_id == thisRoutine.routine_id ? <span className={styles['navigation__completed-indicator']}>on deck</span>: ``}
+        </div>
         <div className={styles['navigation__header-bar-section']}>
             <button className={routineCompleted ? styles['navigation__completed-indicator']: styles['navigation__completed-button']} onClick={markRoutineCompleted}>complete</button>
         </div>
@@ -55,7 +54,8 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
             <ul>
                 {routines.map((routine, id) => <li className={styles['navigation__menu-item']} key={id}>
                     <a href={`/routine/${routine.routine_id}`}>{routine.routine_name}</a>
-                    {(nextRoutine.routine_id == routine.routine_id) ? <span className={styles['navigation__completed-indicator']}>current</span> : <span></span>}
+                    {(nextRoutine.routine_id == routine.routine_id) ? <span className={styles['navigation__completed-indicator']}>on deck</span> : <span></span>}
+                    <p>Last: {routine.to_char}</p>
                 </li>)}
             </ul>
         </navigation>

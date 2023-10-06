@@ -25,11 +25,16 @@ $menu-width: 70vw;
         h1 {
             font-size: 22px;
             text-align: center;
+            margin-right: 12px
         }
 
-        div:last-of-type {
+        div {
             @extend %horizontal-center;
-            justify-content: flex-end;
+            justify-content: flex-start;
+
+            &:last-of-type {
+                justify-content: flex-end;
+            }
         }
 
         .icon-button {
@@ -81,12 +86,19 @@ $menu-width: 70vw;
 
         &-item {
             @extend %horizontal-center;
+            flex-wrap: wrap;
             width: 100%;
             margin-bottom: 24px;
 
             a {
                 flex: 1;
                 font-weight: 600;
+                margin-bottom: 4px;
+            }
+
+            p {
+                width: 100%;
+                font-size: 12px;
             }
         }
 
