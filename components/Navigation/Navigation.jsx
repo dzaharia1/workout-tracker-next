@@ -3,8 +3,8 @@ import styles from './Navigation.module.scss'
 import IconButton from '../iconButton'
 import Button from '../Button'
 
-const Navigation = ({thisRoutine, routines, nextRoutine}) => {
-    const [routineCompleted, setRoutineCompleted] = useState(true);
+const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
+    const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
     const apiUrl = process.env.API_URL || `http://localhost:3333`;
 
     function markRoutineCompleted() {
@@ -12,10 +12,12 @@ const Navigation = ({thisRoutine, routines, nextRoutine}) => {
             method: 'POST',
             mode: 'no-cors'
         }).then(data => {
-            console.log(styles['navigation__complete-button'])
-            const completeButton = document.querySelector(`${styles['navigation__complete-button']}`)
-            console.log(completeButton);
-            completeButton.classList.add(styles['navigation__completed-indicator']);
+            console.log(data);
+            // console.log(styles['navigation__complete-button'])
+            // const completeButton = document.querySelector(`${styles['navigation__complete-button']}`)
+            // console.log(completeButton);
+            // completeButton.classList.add(styles['navigation__completed-indicator']);
+            setRoutineCompleted(true);
         })
     }
 
@@ -42,7 +44,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine}) => {
         </div>
         <h1>{thisRoutine.routine_name}</h1>
         <div className={styles['navigation__header-bar-section']}>
-            <button className={styles['navigation__complete-button']} onClick={markRoutineCompleted}>complete</button>
+            <button className={routineCompleted ? styles['navigation__completed-indicator']: styles['navigation__completed-button']} onClick={markRoutineCompleted}>complete</button>
         </div>
         <button className={styles['navigation__menu-scrim']} onClick={toggleMenu} />
         <navigation className={styles['navigation__menu']}>

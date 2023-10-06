@@ -2,10 +2,14 @@
 
 $menu-height: 95vh;
 $menu-width: 70vw;
-
+%completed-indicator {
+    background-color: mediumseagreen;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 16px;
+    font-weight: 600;
+}
 .navigation {
-    &__complete-button {}
-
     &__header-bar {
         @extend %horizontal-center;
         justify-content: space-between;
@@ -118,6 +122,8 @@ $menu-width: 70vw;
     }
 
     &__completed-button {
-        
+        @extend %completed-indicator;
+        background-color: lightgray;
+        color: black;
     }
 }

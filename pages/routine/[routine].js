@@ -54,7 +54,8 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
           routines={routineData}
-          apiUrl={apiUrl} />
+          apiUrl={apiUrl}
+          today={today} />
         <SetList superSets={superSets} 
                  today={today}
                  routineId={ thisRoutine['routine_id'] }
