@@ -5,7 +5,6 @@ import MovementJournal from '../MovementJournal'
 
 const movementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, today, apiUrl, refreshWorkoutData }) => {
     let [movementJournal, setMovementJournal] = useState([]);
-    console.log(instruction)
 
     function loadJournal() {
         const url = `${apiUrl}/journal/movement/${movementId}`;

@@ -55,6 +55,10 @@
           flex: 1;
       }
 
+      &-note-field {
+        width: 100%;
+      }
+
       &-inputs {
           @extend %horizontal-start;
 
@@ -74,6 +78,25 @@
                   border-radius: 4px;
                   text-align: center;
               }
+          }
+
+          &--note {
+            @extend .movement-journal__form-inputs;
+            width: 100%;
+            
+            label {
+              @extend %vertical-start;
+              width: 100%;
+              margin: 0;
+              text-align: left;
+
+              input {
+                height: 48px;
+                padding: 8px;
+                font-size: 14px;
+                text-align: left;
+              }
+            }
           }
       }
 

@@ -45,9 +45,19 @@
       text-align: left;
     }
 
-    &--date {
+    &--date,
+    &--note {
       flex: 1;
     }
+
+    &--note {
+      @extend %horizontal-start;
+      
+      p {
+        text-align: left;
+      }
+    }
+
   }
 
   &__button-row {
