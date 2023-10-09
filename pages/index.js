@@ -89,5 +89,5 @@ export async function getStaticProps() {
     today = data.todaysDate;
   })
 
-  return { props: { workoutData, routineData, thisRoutine, nextRoutine, today } }
+  return { props: { workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl } }
 }
