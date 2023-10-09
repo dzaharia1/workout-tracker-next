@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Router, useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
-import SetList from '../components/setList';
 import Navigation from '../components/Navigation';
+import SetList from '../components/SetList';
 
 export default function Home({ workoutData, routineData, today, thisRoutine, nextRoutine, apiUrl }) {
   const router = useRouter();
@@ -70,13 +70,15 @@ export default function Home({ workoutData, routineData, today, thisRoutine, nex
 //   apiUrl = process.env.apiUrl || `http://localhost:3333`;
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const apiUrl = process.env.API_URL || `http://localhost:3333`;
   let routineData,
       workoutData,
       thisRoutine,
       nextRoutine,
       today;
+      
+  console.log(apiUrl);
 
   await fetch (`${apiUrl}/routine/current`, { accept: "application/json" })
   .then (data => data.json())
