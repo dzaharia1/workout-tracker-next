@@ -70,7 +70,7 @@ export default function Home({ workoutData, routineData, today, thisRoutine, nex
 //   apiUrl = process.env.apiUrl || `http://localhost:3333`;
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const apiUrl = process.env.API_URL || `http://localhost:3333`;
   let routineData,
       workoutData,
