@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import { Router, useRouter } from 'next/router'
-import Head from 'next/head'
-import Image from 'next/image'
-// import styles from '../styles/Home.module.scss'
-import SetList from '../components/setList'
-import Navigation from '../components/Navigation'
+import React, {useState, useEffect} from 'react';
+import { Router, useRouter } from 'next/router';
+import Head from 'next/head';
+import Image from 'next/image';
+import SetList from '../components/setList';
+import Navigation from '../components/Navigation';
 
 export default function Home({ workoutData, routineData, today, thisRoutine, nextRoutine, apiUrl }) {
   const router = useRouter();
