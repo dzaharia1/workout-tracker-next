@@ -9,10 +9,6 @@ import Navigation from '../../components/Navigation'
 export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
   let [superSets, setSuperSets] = useState([])
-  
-  useEffect(() => {
-    formatWorkoutData()
-  }, [workoutData]);
 
   const formatWorkoutData = (data) => {
     let updatedSuperSets = [];
@@ -41,6 +37,10 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         superSets = formatWorkoutData(data.movements);
       })
   }
+  
+  useEffect(() => {
+    formatWorkoutData()
+  }, [workoutData]);
 
   return (
     <div>

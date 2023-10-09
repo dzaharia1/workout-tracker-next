@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import setList from '.';
-import MovementCard from '../movementCard';
+import MovementCard from '../MovementCard';
 import styles from './setList.module.scss'
 
 const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {

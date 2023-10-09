@@ -1,3 +1,3 @@
-import movementCard from "./movementCard";
+import MovementCard from "./MovementCard";
 
-export default movementCard
+export default MovementCard

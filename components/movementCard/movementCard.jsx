@@ -3,7 +3,7 @@ import styles from './movementCard.module.scss'
 import Overlay from '../Overlay'
 import MovementJournal from '../MovementJournal'
 
-const movementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, today, apiUrl, refreshWorkoutData }) => {
+const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, today, apiUrl, refreshWorkoutData }) => {
     let [movementJournal, setMovementJournal] = useState([]);
 
     function loadJournal() {
@@ -58,4 +58,4 @@ const movementCard = ({displayName, slug, instruction, last_logged, weight, sets
     </div>
 }
 
-export default movementCard;
+export default MovementCard;

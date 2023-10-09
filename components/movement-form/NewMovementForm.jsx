@@ -3,7 +3,7 @@ import styles from './NewMovementForm.module.scss'
 
 const NewMovementForm = ({refreshData, movementName, superset}) => {
     // const [formMovementValues, setMovementValues] = useState({ name: '', weight: 0, sets: 0, reps: 0 });
-    const [movementName, setMovementName] = useState(movementName);
+    const [thisMovementName, setThisMovementName] = useState(thisMovementName);
     const [superset, setSuperSet] = useState(0);
 
     // function handleNameChange (e) {
