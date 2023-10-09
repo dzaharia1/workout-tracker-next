@@ -77,6 +77,8 @@ export async function getServerSideProps() {
       thisRoutine,
       nextRoutine,
       today;
+      
+  console.log(apiUrl);
 
   await fetch (`${apiUrl}/routine/current`, { accept: "application/json" })
   .then (data => data.json())
