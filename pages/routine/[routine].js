@@ -52,16 +52,16 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
         <meta name="theme-color" content="#232338"/>
       </Head>
-        <Navigation thisRoutine={thisRoutine}
-          nextRoutine={nextRoutine}
-          routines={routineData}
-          apiUrl={apiUrl}
-          today={today} />
-        <SetList superSets={superSets} 
-                 today={today}
-                 routineId={ thisRoutine['routine_id'] }
-                 apiUrl={apiUrl}
-                 refreshWorkoutData = {refreshWorkoutData} />
+      <Navigation thisRoutine={thisRoutine}
+        nextRoutine={nextRoutine}
+        routines={routineData}
+        apiUrl={apiUrl}
+        today={today} />
+      <SetList superSets={superSets} 
+                today={today}
+                routineId={ thisRoutine['routine_id'] }
+                apiUrl={apiUrl}
+                refreshWorkoutData = {refreshWorkoutData} />
     </main>
   )
 }
