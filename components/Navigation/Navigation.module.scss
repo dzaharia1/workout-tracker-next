@@ -54,6 +54,7 @@ $menu-width: 70vw;
         top: calc((100vh - $menu-height) / 2);
         left: 5vw;
         width: $menu-width;
+        max-width: 375px;
         height: $menu-height;
         
         border-radius: 6px;
