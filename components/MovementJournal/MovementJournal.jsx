@@ -79,6 +79,40 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     }
 
     return <div className={styles["movement-journal"]}>
+        <ul className={styles["movement-journal__journal"]}>
+            { journalData.map((entry, i) => {
+                if (entry.note) {
+                    return <li className={styles["movement-journal__entry"]} key={i}>
+                        <div className={`${styles['movement-card__attribute']} ${styles['movement-card__attribute--date']}`}>
+                            <h4>Note from {entry.to_char}</h4>
+                            <p>{entry.note}</p>
+                        </div>
+                    </li>
+                }
+                return <li className={styles["movement-journal__entry"]} key={i}>
+                    {entry.instruction ? 
+                        <div className={styles['movement-card__attribute--date']}><span className={styles['movement-card__completed-indicator']}>Instruction</span></div>
+                        :
+                        <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
+                            <p>{entry.to_char}</p>
+                            <h4>Last logged</h4>
+                        </div>
+                    }
+                    <div className={styles["movement-card__attribute"]}>
+                        <p>{entry.weight}</p>
+                        <h4>lbs</h4>
+                    </div>
+                    <div className={styles["movement-card__attribute"]}>
+                        <p>{entry.sets}</p>
+                        <h4>sets</h4>
+                    </div>
+                    <div className={styles["movement-card__attribute"]}>
+                        <p>{entry.reps}</p>
+                        <h4>reps</h4>
+                    </div>
+                </li>
+            }) }
+        </ul>
         <div className={`${styles['movement-journal__button-row']} ${styles['movement-journal__button-row--visible']}`} id={`button-row-${movementId}`}>
             <Button label="Add entry" id={`add-entry-${movementId}`} clickHandler={showEntryForm} />
             <Button label="Add note" id={`add-note-${movementId}`} clickHandler={showNoteForm} />
@@ -121,40 +155,6 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                 <Button label="Cancel" id={`${movementId}__note-cancel-button`} clickHandler={hideNoteForm} />
             </div>
         </form>
-        <ul className={styles["movement-journal__journal"]}>
-            { journalData.map((entry, i) => {
-                if (entry.note) {
-                    return <li className={styles["movement-journal__entry"]} key={i}>
-                        <div className={`${styles['movement-card__attribute']} ${styles['movement-card__attribute--date']}`}>
-                            <h4>Note from {entry.to_char}</h4>
-                            <p>{entry.note}</p>
-                        </div>
-                    </li>
-                }
-                return <li className={styles["movement-journal__entry"]} key={i}>
-                    {entry.instruction ? 
-                        <div className={styles['movement-card__attribute--date']}><span className={styles['movement-card__completed-indicator']}>Instruction</span></div>
-                        :
-                        <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
-                            <p>{entry.to_char}</p>
-                            <h4>Last logged</h4>
-                        </div>
-                    }
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.weight}</p>
-                        <h4>lbs</h4>
-                    </div>
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.sets}</p>
-                        <h4>sets</h4>
-                    </div>
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.reps}</p>
-                        <h4>reps</h4>
-                    </div>
-                </li>
-            }) }
-        </ul>
     </div>
 }
 

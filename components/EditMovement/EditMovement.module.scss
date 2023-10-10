@@ -1,0 +1,20 @@
+@import '../MovementJournal/MovementJournal.module.scss';
+
+.edit-movement {
+    @extend .movement-journal__form-inputs;
+    @extend %vertical-start;
+    width: 100%;
+
+    label {
+        @extend %vertical-start;
+        text-align: left;
+        width: 100%;
+        margin: 0 0 16px 0;
+
+        input,
+        select {
+            width: 100%;
+            margin-top: 8px;
+        }
+    }
+}

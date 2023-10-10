@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from './movementCard.module.scss'
 import Overlay from '../Overlay'
 import MovementJournal from '../MovementJournal'
+import EditMovement from '../EditMovement'
 
-const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, today, apiUrl, refreshWorkoutData }) => {
+const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, setId, superSets, today, apiUrl, refreshWorkoutData }) => {
     let [movementJournal, setMovementJournal] = useState([]);
 
     function loadJournal() {
@@ -18,19 +19,25 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
 
     return <div className={styles["movement-card"]}>
         <div className={styles["movement-card__header"]}>
+            <div className={last_logged === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']}></div>
             <h3>{ displayName }</h3>
             <div className={styles["movement-card__button-row"]}>
                 <Overlay onShow={loadJournal} title={displayName} triggerIcon="/img/journal.svg" id={`journal-${slug}`} >
                     <MovementJournal journalData={movementJournal}
-                                     movementId={movementId}
-                                     routineId={routineId}
-                                    //  setCardInfo={setCardInfo}
-                                     today={today}
-                                     apiUrl={apiUrl}
-                                     loadJournal={loadJournal}
-                                     refreshWorkoutData={refreshWorkoutData} />
+                        movementId={movementId}
+                        routineId={routineId}
+                        today={today}
+                        apiUrl={apiUrl}
+                        loadJournal={loadJournal}
+                        refreshWorkoutData={refreshWorkoutData} />
                 </Overlay>
-                <Overlay title={`Edit ${displayName}`} triggerIcon="/img/edit.svg" id={`editor-${slug}`}></Overlay>
+                <Overlay title={`Edit ${displayName}`} triggerIcon="/img/edit.svg" id={`editor-${slug}`}>
+                    <EditMovement movementId={movementId}
+                        movementName={displayName}
+                        setId={setId}
+                        apiUrl={apiUrl}
+                        superSets={superSets} />
+                </Overlay>
             </div>
         </div>
         <div className={styles["movement-card__attributes"]}>
