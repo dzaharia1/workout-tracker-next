@@ -7,6 +7,7 @@ $overlay-height: 90vh;
     position: fixed;
     height: $overlay-height;
     width: $overlay-width;
+    max-width: $site-max-width;
     top: calc((100vh - $overlay-height) / 2);
     left: calc((100vw - $overlay-width) / 2);
     box-shadow: $box-shadow;
@@ -22,6 +23,10 @@ $overlay-height: 90vh;
         transition: transform $easing,
             opacity $easing,
             visibility $easing;
+    
+    @media screen and (min-width: 600px) {
+        left: calc((100vw - $site-max-width) / 2)
+    }
 
     &--visible {
         transform: scale(1);
