@@ -4,7 +4,7 @@ import Overlay from '../Overlay'
 import MovementJournal from '../MovementJournal'
 import EditMovement from '../EditMovement'
 
-const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, setId, today, apiUrl, refreshWorkoutData }) => {
+const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, setId, superSets, today, apiUrl, refreshWorkoutData }) => {
     let [movementJournal, setMovementJournal] = useState([]);
 
     function loadJournal() {
@@ -35,7 +35,8 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
                     <EditMovement movementId={movementId}
                         movementName={displayName}
                         setId={setId}
-                        apiUrl={apiUrl} />
+                        apiUrl={apiUrl}
+                        superSets={superSets} />
                 </Overlay>
             </div>
         </div>

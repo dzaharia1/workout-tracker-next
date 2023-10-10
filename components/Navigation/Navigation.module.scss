@@ -11,11 +11,15 @@ $menu-width: 70vw;
         left: 0;
         top: 0;
         right: 0;
-        padding: 0px $padding;
+        padding: 0 $padding;
         height: $header-height;
         background-color: white;
     
         box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
+
+        @media screen and (min-width: 600px) {
+            padding: 0 calc((100vw - $site-max-width) / 2 + $padding);
+        }
 
         &-section,
         h1 {
