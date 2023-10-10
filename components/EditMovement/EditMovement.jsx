@@ -19,7 +19,7 @@ const EditMovement = ({movementId, movementName, setId, superSets, apiUrl}) => {
             Superset
             <select name="superset" id={`${movementId}__superset-dropdown`}>
                 {superSets.map((superSet, i) => {
-                    return <option value={superSet.id} default={setId == superSet.id ? 'true' : 'false'} >{superSet.id}</option>
+                    return <option value={superSet.id} default={setId == superSet.id ? 'true' : 'false'} key={i}>{superSet.id}</option>
                 })}
             </select>
         </label>
