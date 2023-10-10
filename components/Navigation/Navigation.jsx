@@ -53,7 +53,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
             </div>
             <ul>
                 {routines.map((routine, id) => <li className={styles['navigation__menu-item']} key={id}>
-                    <a href={`/routine/${routine.routine_id}`}>{routine.routine_name}</a>
+                    <a href={`/${routine.routine_id}`}>{routine.routine_name}</a>
                     {(nextRoutine.routine_id == routine.routine_id) ? <span className={styles['navigation__completed-indicator']}>on deck</span> : <span></span>}
                     <p>Last: {routine.to_char}</p>
                 </li>)}

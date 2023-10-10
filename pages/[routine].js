@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Navigation from '../components/Navigation';
 import SetList from '../components/SetList';
 
-export default function Home({ workoutData, routineData, today, thisRoutine, nextRoutine, apiUrl }) {
+export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
   let [superSets, setSuperSets] = useState([])
 
@@ -66,22 +66,16 @@ export default function Home({ workoutData, routineData, today, thisRoutine, nex
   )
 }
 
-// export async function getServerSideProps() {
-//   const routineId = params.routineId;
-//   apiUrl = process.env.apiUrl || `http://localhost:3333`;
-// }
-
-export async function getServerSideProps() {
+export async function getServerSideProps({params}) {
   const apiUrl = process.env.API_URL || `http://localhost:3333`;
+  const routineId = params.routine
   let routineData,
       workoutData,
       thisRoutine,
       nextRoutine,
       today;
-      
-  console.log(apiUrl);
 
-  await fetch (`${apiUrl}/routine/current`, { accept: "application/json" })
+  await fetch (`${apiUrl}/routine/${routineId}`, { accept: "application/json" })
   .then (data => data.json())
   .then (data => {
     routineData = data.routines;
@@ -92,4 +86,34 @@ export async function getServerSideProps() {
   })
 
   return { props: { workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl } }
+}
+
+export async function getServerSidePaths() {
+    const apiUrl = process.env.API_URL || `http://localhost:3333`;
+    const routines = await fetch(`${apiUrl}/routines`).then(data => data.json());
+    const paths = routines.map(item => {
+        return {
+            params: {
+                routine: item.routine_id
+            }
+        }
+    })
+
+    return {
+        paths,
+        fallback: false
+    }
+//   const apiUrl = process.env.API_URL;
+//   const signIds = await fetch(`${apiUrl}/signids`).then(data => data.json());
+//   const paths = signIds.map((item) => {
+//     return {
+//       params: {
+//         sign: item.sign_id
+//       }
+//     }
+//   })
+  return {
+    paths,
+    fallback: false
+  }
 }
