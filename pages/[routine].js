@@ -16,7 +16,6 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
     for (let movement of rawData) {
       const superSetId = movement.set_id - 1;
       if (updatedSuperSets[superSetId] == null) {
-        console.log(`Found superSet ${movement.set_id}`)
         updatedSuperSets[superSetId] = {
           id: movement.set_id,
           movements: []

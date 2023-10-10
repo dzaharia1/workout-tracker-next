@@ -5,10 +5,8 @@ $overlay-height: 90vh;
 .overlay {
     @extend %vertical-start;
     position: fixed;
-    height: $overlay-height;
     width: $overlay-width;
     max-width: $site-max-width;
-    top: calc((100vh - $overlay-height) / 2);
     left: calc((100vw - $overlay-width) / 2);
     box-shadow: $box-shadow;
     opacity: 0;
@@ -20,9 +18,19 @@ $overlay-height: 90vh;
     border-radius: 12px;
     background-color: transparentize(white, .92);
     backdrop-filter: $backdropFilter;
-        transition: transform $easing,
-            opacity $easing,
-            visibility $easing;
+    transition: transform $easing,
+        opacity $easing,
+        visibility $easing;
+
+    &--fill {
+        height: $overlay-height;
+        top: calc((100vh - $overlay-height) / 2);
+    }
+
+    &--hug {
+        max-height: $overlay-height;
+        bottom: calc((100vh - $overlay-height) / 2);
+    }
     
     @media screen and (min-width: 600px) {
         left: calc((100vw - $site-max-width) / 2)
