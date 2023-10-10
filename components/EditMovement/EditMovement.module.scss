@@ -6,7 +6,6 @@
     width: 100%;
 
     label {
-        @extend %vertical-start;
         text-align: left;
         width: 100%;
         margin: 0 0 16px 0;
@@ -15,6 +14,23 @@
         select {
             width: 100%;
             margin-top: 8px;
+            text-align: left;
+            padding: 4px 8px;
+            height: 36px;
+        }
+    }
+
+    &__delete-confirmation-stage {
+        &-1 {
+            background-color: orangered;
+            color: white;
+            font-weight: 600;
+        }
+
+        &-2 {
+            background-color: red;
+            color: white;
+            font-weight: 600;
         }
     }
 }

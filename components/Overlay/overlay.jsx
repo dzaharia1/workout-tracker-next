@@ -1,8 +1,8 @@
 import styles from './overlay.module.scss';
 import IconButton from '../iconButton';
+import React from 'react';
 
-const Overlay = ({children, triggerIcon, title, id, onShow}) => {
-
+const Overlay = ({triggerIcon, title, id, sizing, onShow, children}) => {
     let overlayVisible = false;
 
     function showOverlay() {
@@ -32,7 +32,7 @@ const Overlay = ({children, triggerIcon, title, id, onShow}) => {
         <IconButton icon={triggerIcon}
             clickHandler={showOverlay}></IconButton>
         <button className={styles["overlay__scrim"]} id={id} onClick={hideOverlay}/>
-        <div className={styles["overlay"]} id={id}>
+        <div className={`${styles["overlay"]} ${styles[`overlay--${sizing}`]}`} id={id}>
             <div className={styles["overlay__header"]}>
                 <img className={styles['overlay__header-icon']} src={triggerIcon} alt="" />
                 <h2 className={styles['overlay__header-title']}>{ title }</h2>
@@ -41,7 +41,7 @@ const Overlay = ({children, triggerIcon, title, id, onShow}) => {
                     size={36} />
             </div>
             <div className={styles["overlay__contents"]}>
-                { children }
+                { React.cloneElement(children, { hideOverlay: hideOverlay }) }
             </div>
         </div>
     </div>
