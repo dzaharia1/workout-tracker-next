@@ -28,7 +28,8 @@ const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
                             routineId={routineId}
                             today={today}
                             apiUrl={apiUrl}
-                            refreshWorkoutData = {refreshWorkoutData} />
+                            refreshWorkoutData = {refreshWorkoutData}
+                            setId={superSet.id} />
                     }) }
                 </ul>
             </div>

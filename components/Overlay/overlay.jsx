@@ -6,7 +6,7 @@ const Overlay = ({children, triggerIcon, title, id, onShow}) => {
     let overlayVisible = false;
 
     function showOverlay() {
-        onShow();
+        if (onShow) onShow();
         console.log(`show overlay ${title}`)
         overlayVisible = true;
         document.querySelector(`.${styles["overlay"]}#${id}`)

@@ -72,9 +72,10 @@ $overlay-height: 90vh;
     }
 
     &__contents {
+        @extend %vertical-start;
         width: 100%;
-        flex: 1;
-        overflow-y: scroll;
+        height: 50%;
         overflow-x: visible;
+        flex: 1;
     }
 }
