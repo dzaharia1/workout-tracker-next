@@ -3,9 +3,8 @@ import styles from './Navigation.module.scss'
 import IconButton from '../iconButton'
 import Button from '../Button'
 
-const Navigation = ({thisRoutine, routines, nextRoutine, today}) => {
+const Navigation = ({thisRoutine, routines, nextRoutine, today, apiUrl}) => {
     const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
-    const apiUrl = process.env.API_URL || `http://localhost:3333`;
 
     function markRoutineCompleted() {
         fetch(`${apiUrl}/routine/markComplete/${thisRoutine.routine_id}`, {
