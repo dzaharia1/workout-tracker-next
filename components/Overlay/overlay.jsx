@@ -1,26 +1,17 @@
 import styles from './overlay.module.scss';
 import IconButton from '../iconButton';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Overlay = ({triggerIcon, title, id, sizing, onShow, children}) => {
-    let overlayVisible = false;
+    let [overlayVisible, setOverlayVisible] = useState(false);
 
     function showOverlay() {
         if (onShow) onShow();
-        console.log(`show overlay ${title}`)
-        overlayVisible = true;
-        document.querySelector(`.${styles["overlay"]}#${id}`)
-            .classList.add(styles["overlay--visible"]);
-        document.querySelector(`.${styles["overlay__scrim"]}#${id}`)
-            .classList.add(styles["overlay__scrim--visible"]);
+        setOverlayVisible(true);
     }
         
     function hideOverlay() {
-        overlayVisible = false;
-        document.querySelector(`.${styles["overlay"]}#${id}`)
-        .classList.remove(styles["overlay--visible"]);
-        document.querySelector(`.${styles["overlay__scrim"]}#${id}`)
-            .classList.remove(styles["overlay__scrim--visible"]);
+        setOverlayVisible(false);
     }
 
     function toggleOverlay() {
@@ -31,8 +22,8 @@ const Overlay = ({triggerIcon, title, id, sizing, onShow, children}) => {
         {/* <button className="overlay__trigger" onClick={showOverlay}></button> */}
         <IconButton icon={triggerIcon}
             clickHandler={showOverlay}></IconButton>
-        <button className={styles["overlay__scrim"]} id={id} onClick={hideOverlay}/>
-        <div className={`${styles["overlay"]} ${styles[`overlay--${sizing}`]}`} id={id}>
+        <button className={`${styles["overlay__scrim"]} ${overlayVisible && styles["overlay__scrim--visible"]}`} id={id} onClick={hideOverlay}/>
+        <div className={`${styles["overlay"]} ${styles[`overlay--${sizing}`]} ${overlayVisible && styles['overlay--visible']}`} id={id}>
             <div className={styles["overlay__header"]}>
                 <img className={styles['overlay__header-icon']} src={triggerIcon} alt="" />
                 <h2 className={styles['overlay__header-title']}>{ title }</h2>
