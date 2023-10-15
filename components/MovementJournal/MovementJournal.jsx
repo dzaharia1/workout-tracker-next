@@ -3,38 +3,31 @@ import styles from './MovementJournal.module.scss';
 import Button from '../Button'
 
 const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUrl, loadJournal, refreshWorkoutData}) => {
+    let [entryWeight, setEntryWeight] = useState('');
+    let [entrySets, setEntrySets] = useState('');
+    let [entryReps, setEntryReps] = useState('');
+    let [entryInstruction, setEntryInstruction] = useState(false);
+    let [entryNote, setEntryNote] = useState('');
+    let [noteFormVisible, setNoteFormVisible] = useState(false);
+    let [entryFormVisible, setEntryFormVisible] = useState(false);
+    let [buttonRowVisible, setButtonRowVisible] = useState(true);
+
     function showEntryForm() {
-        let form = document.querySelector(`#entry-form-${movementId}`);
-        let buttonRow = document.querySelector(`#button-row-${movementId}`);
-        const formVisibleClass = styles['movement-journal__form--visible'];
-        const buttonRowVisibleClass = styles['movement-journal__button-row--visible'];
-        form.classList.add(formVisibleClass);
-        buttonRow.classList.remove(buttonRowVisibleClass);
+        setEntryFormVisible(true);
+        setButtonRowVisible(false);
     }
 
     function hideEntryForm() {
-        const instruction = document.querySelector(`#instruction-${movementId}`);
-        const weight = document.querySelector(`#weight-input-${movementId}`);
-        const sets = document.querySelector(`#sets-input-${movementId}`);
-        const reps = document.querySelector(`#reps-input-${movementId}`);
-        let form = document.querySelector(`#entry-form-${movementId}`);
-        let buttonRow = document.querySelector(`#button-row-${movementId}`);
-        const formVisibleClass = styles['movement-journal__form--visible'];
-        const buttonRowVisibleClass = styles['movement-journal__button-row--visible'];
-        form.classList.remove(formVisibleClass);
-        buttonRow.classList.add(buttonRowVisibleClass);
-        instruction.checked = false;
-        weight.value = '';
-        sets.value = '';
-        reps.value = '';
+        setEntryFormVisible(false);
+        setButtonRowVisible(true);
+        setEntryInstruction(false);
+        setEntryWeight('');
+        setEntrySets('');
+        setEntryReps('');
     }
 
     function saveEntryForm() {
-        const instruction = document.querySelector(`#instruction-${movementId}`);
-        const weight = document.querySelector(`#weight-input-${movementId}`);
-        const sets = document.querySelector(`#sets-input-${movementId}`);
-        const reps = document.querySelector(`#reps-input-${movementId}`);
-        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${weight.value}/${sets.value}/${reps.value}/${instruction.checked}`;
+        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${entryWeight}/${entrySets}/${entryReps}/${entryInstruction}`;
         
         fetch(url, {
             method: 'POST'
@@ -46,28 +39,18 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     }
 
     function showNoteForm() {
-        let form = document.querySelector(`#note-form-${movementId}`);
-        let buttonRow = document.querySelector(`#button-row-${movementId}`);
-        const formVisibleClass = styles['movement-journal__form--visible'];
-        const buttonRowVisibleClass = styles['movement-journal__button-row--visible'];
-        form.classList.add(formVisibleClass);
-        buttonRow.classList.remove(buttonRowVisibleClass);
+        setNoteFormVisible(true);
+        setButtonRowVisible(false);
     }
 
     function hideNoteForm() {
-        const noteField = document.querySelector(`#notes-input-${movementId}`);
-        let form = document.querySelector(`#note-form-${movementId}`);
-        let buttonRow = document.querySelector(`#button-row-${movementId}`);
-        const formVisibleClass = styles['movement-journal__form--visible'];
-        const buttonRowVisibleClass = styles['movement-journal__button-row--visible'];
-        form.classList.remove(formVisibleClass);
-        buttonRow.classList.add(buttonRowVisibleClass);
-        noteField.value = '';
+        setNoteFormVisible(false);
+        setButtonRowVisible(true);
+        setEntryNote('');
     }
 
     function saveNoteForm() {
-        const note = document.querySelector(`#notes-input-${movementId}`);
-        const url = `${apiUrl}/journal/addmovementnote/${routineId}/${movementId}/${note.value}`;
+        const url = `${apiUrl}/journal/addmovementnote/${routineId}/${movementId}/${entryNote}`;
         
         fetch(url, {
             method: 'POST'
@@ -113,29 +96,45 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                 </li>
             }) }
         </ul>
-        <div className={`${styles['movement-journal__button-row']} ${styles['movement-journal__button-row--visible']}`} id={`button-row-${movementId}`}>
+        <div className={`${styles['movement-journal__button-row']} ${buttonRowVisible && styles['movement-journal__button-row--visible']}`} id={`button-row-${movementId}`}>
             <Button label="Add entry" id={`add-entry-${movementId}`} clickHandler={showEntryForm} />
             <Button label="Add note" id={`add-note-${movementId}`} clickHandler={showNoteForm} />
         </div>
-        <form action="" className={styles['movement-journal__form']} id={`entry-form-${movementId}`}>
+        <form action="" className={`${styles['movement-journal__form']} ${entryFormVisible && styles['movement-journal__form--visible']}`} id={`entry-form-${movementId}`}>
             <div className={styles["movement-journal__form-header"]}>
                 <p>Add entry</p>
                 <label htmlFor="">
-                    <input type="checkbox" id={`instruction-${movementId}`}/>
+                    <input
+                        type="checkbox"
+                        id={`instruction-${movementId}`}
+                        value={entryInstruction}
+                        onChange={(e) => {setEntryInstruction(e.target.checked)}}/>
                     Instruction
                 </label>
             </div>
             <div className={styles["movement-journal__form-inputs"]}>
                 <label htmlFor="">
-                    <input type="number" id={`weight-input-${movementId}`}/>
+                    <input
+                        type="number"
+                        id={`weight-input-${movementId}`}
+                        value={entryWeight}
+                        onChange={(e) => {setEntryWeight(e.target.value)}}/>
                     lbs
                 </label>
                 <label htmlFor="">
-                    <input type="number" id={`sets-input-${movementId}`}/>
+                    <input
+                        type="number"
+                        id={`sets-input-${movementId}`}
+                        value={entrySets}
+                        onChange={(e) => {setEntrySets(e.target.value)}}/>
                     sets
                 </label>
                 <label htmlFor="">
-                    <input type="number" id={`reps-input-${movementId}`}/>
+                    <input
+                        type="number"
+                        id={`reps-input-${movementId}`}
+                        value={entryReps}
+                        onChange={(e) => {setEntryReps(e.target.value)}}/>
                     reps
                 </label>
             </div>
@@ -144,10 +143,15 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                 <Button label="Cancel" id={`${movementId}__entry-cancel-button`} clickHandler={hideEntryForm} />
             </div>
         </form>
-        <form className={styles['movement-journal__form']} id={`note-form-${movementId}`}>
+        <form className={`${styles['movement-journal__form']} ${noteFormVisible && styles['movement-journal__form--visible']}`} id={`note-form-${movementId}`}>
             <div className={styles['movement-journal__form-inputs--note']}>
                 <label htmlFor="">
-                    <input type="text" placeholder="Note: E.g. deeper stretch" id={`notes-input-${movementId}`}/>
+                    <input
+                        type="text"
+                        placeholder="Note: E.g. deeper stretch"
+                        id={`notes-input-${movementId}`}
+                        value={entryNote}
+                        onChange={(e) => { setEntryNote(e.target.value) }} />
                 </label>
             </div>
             <div className={styles['movement-journal__form-buttons']}>

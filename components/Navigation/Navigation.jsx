@@ -4,7 +4,8 @@ import IconButton from '../iconButton'
 import Button from '../Button'
 
 const Navigation = ({thisRoutine, routines, nextRoutine, today, apiUrl}) => {
-    const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
+    let [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
+    let [menuVisible, setMenuVisible] = useState(false);
 
     function markRoutineCompleted() {
         fetch(`${apiUrl}/routine/markComplete/${thisRoutine.routine_id}`, {
@@ -17,20 +18,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today, apiUrl}) => {
     }
 
     function toggleMenu() {
-        const menu = document.querySelector('navigation');
-        const scrim = document.querySelector(`.${styles['navigation__menu-scrim']}`)
-        const menuVisibilityClass = styles['navigation__menu--visible'];
-        const scrimVisibilityClass = styles['navigation__menu-scrim--visible']
-        const menuVisible = menu.classList.contains(menuVisibilityClass);
-        
-        if (menuVisible) {
-            menu.classList.remove(menuVisibilityClass);
-            scrim.classList.remove(scrimVisibilityClass);
-        } else {
-            menu.classList.add(menuVisibilityClass);
-            scrim.classList.add(scrimVisibilityClass);
-        }
-        
+        setMenuVisible(!menuVisible);
     }
 
     return <header className={styles['navigation__header-bar']}>
@@ -44,8 +32,8 @@ const Navigation = ({thisRoutine, routines, nextRoutine, today, apiUrl}) => {
         <div className={styles['navigation__header-bar-section']}>
             <button className={routineCompleted ? styles['navigation__completed-indicator']: styles['navigation__completed-button']} onClick={markRoutineCompleted}>complete</button>
         </div>
-        <button className={styles['navigation__menu-scrim']} onClick={toggleMenu} />
-        <navigation className={styles['navigation__menu']}>
+        <button className={`${styles['navigation__menu-scrim']} ${menuVisible && styles['navigation__menu-scrim--visible']}`} onClick={toggleMenu} />
+        <navigation className={`${styles['navigation__menu']} ${menuVisible && styles['navigation__menu--visible']}`}>
             <div>
                 <IconButton icon='/img/back.svg' clickHandler={toggleMenu}></IconButton>
                 <h1>{thisRoutine.routine_name}</h1>

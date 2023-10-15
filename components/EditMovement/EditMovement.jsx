@@ -6,11 +6,11 @@ import Overlay from '../Overlay'
 const EditMovement = ({movementId, movementName, setId, routineId, superSets, apiUrl, refreshWorkoutData, hideOverlay}) => {
     const maxSetId = superSets[superSets.length - 1].id;
     let [movementDeleteConfirm, setMovementDeleteConfirm] = useState(0);
+    let [nameField, setNameField] = useState(movementName);
+    let [superSetField, setSuperSetField] = useState(setId);
 
     function saveEditForm() {
-        const nameField = document.querySelector(`#superset-name-${movementId}`);
-        const superSetField = document.querySelector(`#superset-dropdown-${movementId}`);
-        const url = `${apiUrl}/movement/edit/${movementId}/${nameField.value}/${superSetField.value}`;
+        const url = `${apiUrl}/movement/edit/${movementId}/${nameField}/${superSetField}`;
 
         fetch(url, {
             method: 'PUT'
@@ -37,11 +37,19 @@ const EditMovement = ({movementId, movementName, setId, routineId, superSets, ap
     return <form action="" className={styles['edit-movement']}>
             <label htmlFor="">
                 <p>Movement name</p>
-                <input type="text" defaultValue={movementName} id={`superset-name-${movementId}`}/>
+                <input
+                    type="text"
+                    defaultValue={movementName}
+                    id={`superset-name-${movementId}`}
+                    onChange={e => { setNameField(e.target.value) }} />
             </label>
             <label htmlFor="">
                 <p>Superset</p>
-                <select name="superset" id={`superset-dropdown-${movementId}`} defaultValue={setId}>
+                <select
+                    name="superset"
+                    id={`superset-dropdown-${movementId}`}
+                    defaultValue={superSetField}
+                    onChange={e => setSuperSetField(e.target.value)}>
                     {superSets.map((superSet, i) => <option value={superSet.id} key={i}>Super set {superSet.id}</option>)}
                     <option value={maxSetId + 1}>New super set</option>
                 </select>
