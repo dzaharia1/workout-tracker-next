@@ -5,6 +5,7 @@ import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
 
 const SetList = ({superSets}) => {
+    const {today} = useContext(AppContext);
 
     return <section className={styles["supersets"]}>
         { superSets.map((superSet, i) => {
@@ -12,7 +13,7 @@ const SetList = ({superSets}) => {
                 <header className={styles["super-set__header"]}>
                     <h2>Superset {superSet.id}</h2>
                     {superSet.movements.map((movement, i) => {
-                        return <div className={movement.to_char === useContext(AppContext).today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
+                        return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
                     })}
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
