@@ -22,7 +22,11 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
             <div className={last_logged === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']}></div>
             <h3>{ displayName }</h3>
             <div className={styles["movement-card__button-row"]}>
-                <Overlay onShow={loadJournal} title={displayName} triggerIcon="/img/journal.svg" id={`journal-${slug}`} sizing="fill" >
+                <Overlay
+                    onShow={loadJournal}
+                    title={displayName}
+                    triggerIcon="/img/journal.svg"
+                    sizing="fill" >
                     <MovementJournal journalData={movementJournal}
                         movementId={movementId}
                         routineId={routineId}
@@ -31,7 +35,10 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
                         loadJournal={loadJournal}
                         refreshWorkoutData={refreshWorkoutData} />
                 </Overlay>
-                <Overlay title={`Edit ${displayName}`} triggerIcon="/img/edit.svg" id={`editor-${slug}`} sizing="hug">
+                <Overlay
+                    title={`Edit ${displayName}`}
+                    triggerIcon="/img/edit.svg"
+                    sizing="hug">
                     <EditMovement movementId={movementId}
                         movementName={displayName}
                         setId={setId}

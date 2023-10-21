@@ -3,11 +3,11 @@ import styles from './MovementJournal.module.scss';
 import Button from '../Button'
 
 const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUrl, loadJournal, refreshWorkoutData}) => {
-    let [entryWeight, setEntryWeight] = useState('');
-    let [entrySets, setEntrySets] = useState('');
-    let [entryReps, setEntryReps] = useState('');
-    let [entryInstruction, setEntryInstruction] = useState(false);
-    let [entryNote, setEntryNote] = useState('');
+    let entryWeight = useRef();
+    let entrySets = useRef();
+    let entryReps = useRef();
+    let entryInstruction = useRef();
+    let entryNote = useRef();
     let [noteFormVisible, setNoteFormVisible] = useState(false);
     let [entryFormVisible, setEntryFormVisible] = useState(false);
     let [buttonRowVisible, setButtonRowVisible] = useState(true);
@@ -20,15 +20,16 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     function hideEntryForm() {
         setEntryFormVisible(false);
         setButtonRowVisible(true);
-        setEntryInstruction(false);
-        setEntryWeight('');
-        setEntrySets('');
-        setEntryReps('');
+
+        entryInstruction.current.checked = false;
+        entryWeight.current.value = '';
+        entrySets.current.value = '';
+        entryReps.current.value = '';
     }
 
     function saveEntryForm() {
-        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${entryWeight}/${entrySets}/${entryReps}/${entryInstruction}`;
-        
+        const url = `${apiUrl}/journal/addmovement/${movementId}/${routineId}/${entryWeight.current.value}/${entrySets.current.value}/${entryReps.current.value}/${entryInstruction.current.checked}`;
+
         fetch(url, {
             method: 'POST'
         }).then(() => {
@@ -46,11 +47,11 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
     function hideNoteForm() {
         setNoteFormVisible(false);
         setButtonRowVisible(true);
-        setEntryNote('');
+        entryNote.current.value = '';
     }
 
     function saveNoteForm() {
-        const url = `${apiUrl}/journal/addmovementnote/${routineId}/${movementId}/${entryNote}`;
+        const url = `${apiUrl}/journal/addmovementnote/${routineId}/${movementId}/${entryNote.current.value}`;
         
         fetch(url, {
             method: 'POST'
@@ -107,8 +108,7 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                     <input
                         type="checkbox"
                         id={`instruction-${movementId}`}
-                        value={entryInstruction}
-                        onChange={(e) => {setEntryInstruction(e.target.checked)}}/>
+                        ref={entryInstruction}/>
                     Instruction
                 </label>
             </div>
@@ -117,24 +117,21 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                     <input
                         type="number"
                         id={`weight-input-${movementId}`}
-                        value={entryWeight}
-                        onChange={(e) => {setEntryWeight(e.target.value)}}/>
+                        ref={entryWeight}/>
                     lbs
                 </label>
                 <label htmlFor="">
                     <input
                         type="number"
                         id={`sets-input-${movementId}`}
-                        value={entrySets}
-                        onChange={(e) => {setEntrySets(e.target.value)}}/>
+                        ref={entrySets}/>
                     sets
                 </label>
                 <label htmlFor="">
                     <input
                         type="number"
                         id={`reps-input-${movementId}`}
-                        value={entryReps}
-                        onChange={(e) => {setEntryReps(e.target.value)}}/>
+                        ref={entryReps} />
                     reps
                 </label>
             </div>
@@ -150,8 +147,7 @@ const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUr
                         type="text"
                         placeholder="Note: E.g. deeper stretch"
                         id={`notes-input-${movementId}`}
-                        value={entryNote}
-                        onChange={(e) => { setEntryNote(e.target.value) }} />
+                        ref={entryNote} />
                 </label>
             </div>
             <div className={styles['movement-journal__form-buttons']}>
