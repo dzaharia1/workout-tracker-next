@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useContext } from 'react';
+import { AppContext } from '../AppContext';
 import setList from '.';
 import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
 
-const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
+const SetList = ({superSets}) => {
+    const {today} = useContext(AppContext);
 
     return <section className={styles["supersets"]}>
         { superSets.map((superSet, i) => {
@@ -16,19 +18,17 @@ const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
                     { superSet.movements.map((movement, j) => {
-                        return <MovementCard displayName = {movement.movement_name}
-                            last_logged={movement.to_char}
-                            weight={movement.weight}
-                            reps={movement.num_reps}
-                            sets={movement.num_sets}
-                            slug={movement.movement_slug}
-                            instruction={movement.instruction}
+                        const movementInfo = {
+                            displayName: movement.movement_name,
+                            last_logged: movement.to_char,
+                            weight: movement.weight,
+                            sets: movement.num_sets,
+                            reps: movement.num_reps,
+                            instruction: movement.instruction,
+                            movementId: movement.movement_id
+                        };
+                        return <MovementCard movementInfo={movementInfo}
                             key={j}
-                            movementId={movement.movement_id}
-                            routineId={routineId}
-                            today={today}
-                            apiUrl={apiUrl}
-                            refreshWorkoutData = {refreshWorkoutData}
                             setId={superSet.id}
                             superSets={superSets} />
                     }) }

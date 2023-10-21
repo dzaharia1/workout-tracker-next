@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useContext } from 'react';
+import { AppContext } from '../AppContext';
 import styles from './MovementJournal.module.scss';
 import Button from '../Button'
 
-const MovementJournal = ({journalData, movementId, routineId, setCardInfo, apiUrl, loadJournal, refreshWorkoutData}) => {
+const MovementJournal = ({journalData, movementId, loadJournal}) => {
+    const { apiUrl, routineId, refreshWorkoutData } = useContext(AppContext);
     let entryWeight = useRef();
     let entrySets = useRef();
     let entryReps = useRef();

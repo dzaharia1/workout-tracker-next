@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styles from './Navigation.module.scss'
-import IconButton from '../iconButton'
-import Button from '../Button'
+import React, { useState, useRef, useContext } from 'react';
+import { AppContext } from '../AppContext';
+import styles from './Navigation.module.scss';
+import IconButton from '../iconButton';
+import Button from '../Button';
 
-const Navigation = ({thisRoutine, routines, nextRoutine, today, apiUrl}) => {
+const Navigation = ({thisRoutine, routines, nextRoutine}) => {
+    const {apiUrl, today} = useContext(AppContext);
     let [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
     let [menuVisible, setMenuVisible] = useState(false);
 

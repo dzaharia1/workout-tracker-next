@@ -1,9 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
+import { AppContext } from '../AppContext';
 import styles from './EditMovement.module.scss';
 import Button from '../Button'
 import Overlay from '../Overlay'
 
-const EditMovement = ({movementId, movementName, setId, routineId, superSets, apiUrl, refreshWorkoutData, hideOverlay}) => {
+const EditMovement = ({movementId, movementName, setId, superSets, hideOverlay}) => {
+    const { apiUrl, routineId, refreshWorkoutData } = useContext(AppContext);
     const maxSetId = superSets[superSets.length - 1].id;
     let [movementDeleteConfirm, setMovementDeleteConfirm] = useState(0);
     let nameField = useRef(movementName);
