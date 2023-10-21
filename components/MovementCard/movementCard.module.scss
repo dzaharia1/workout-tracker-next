@@ -65,10 +65,6 @@
     @extend %horizontal-center;
     justify-content: flex-end;
     flex: 1;
-
-    button {
-      margin-left: 12px;
-    }
   }
 
   &__completed-indicator {
