@@ -9,6 +9,7 @@ import SetList from '../components/SetList';
 export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
   let [superSets, setSuperSets] = useState([]);
+  let routineId = thisRoutine['routine_id'];
 
   const formatWorkoutData = (data) => {
     let updatedSuperSets = [];
@@ -42,7 +43,7 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
   }, [workoutData]);
 
   return (
-    <AppContext.Provider value={{apiUrl, today, refreshWorkoutData}}>
+    <AppContext.Provider value={{apiUrl, today, routineId, refreshWorkoutData}}>
       <main>
         <Head>
           <title>Workout Tracker</title>
@@ -57,9 +58,7 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
           routines={routineData} />
-        <SetList superSets={superSets} 
-          today={today}
-          routineId={ thisRoutine['routine_id'] } />
+        <SetList superSets={superSets} />
       </main>
     </AppContext.Provider>
   )

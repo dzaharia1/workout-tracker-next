@@ -4,8 +4,8 @@ import styles from './EditMovement.module.scss';
 import Button from '../Button'
 import Overlay from '../Overlay'
 
-const EditMovement = ({movementId, movementName, setId, routineId, superSets, hideOverlay}) => {
-    const { apiUrl, refreshWorkoutData } = useContext(AppContext);
+const EditMovement = ({movementId, movementName, setId, superSets, hideOverlay}) => {
+    const { apiUrl, routineId, refreshWorkoutData } = useContext(AppContext);
     const maxSetId = superSets[superSets.length - 1].id;
     let [movementDeleteConfirm, setMovementDeleteConfirm] = useState(0);
     let nameField = useRef(movementName);

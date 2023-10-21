@@ -4,7 +4,7 @@ import setList from '.';
 import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
 
-const SetList = ({superSets, routineId}) => {
+const SetList = ({superSets}) => {
 
     return <section className={styles["supersets"]}>
         { superSets.map((superSet, i) => {
@@ -17,15 +17,16 @@ const SetList = ({superSets, routineId}) => {
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
                     { superSet.movements.map((movement, j) => {
-                        return <MovementCard displayName = {movement.movement_name}
-                            last_logged={movement.to_char}
-                            weight={movement.weight}
-                            reps={movement.num_reps}
-                            sets={movement.num_sets}
-                            slug={movement.movement_slug}
-                            instruction={movement.instruction}
-                            movementId={movement.movement_id}
-                            routineId={routineId}
+                        const movementInfo = {
+                            displayName: movement.movement_name,
+                            last_logged: movement.to_char,
+                            weight: movement.weight,
+                            sets: movement.num_sets,
+                            reps: movement.num_reps,
+                            instruction: movement.instruction,
+                            movementId: movement.movement_id
+                        };
+                        return <MovementCard movementInfo={movementInfo}
                             key={j}
                             setId={superSet.id}
                             superSets={superSets} />

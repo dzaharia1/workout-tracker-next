@@ -3,8 +3,8 @@ import { AppContext } from '../AppContext';
 import styles from './MovementJournal.module.scss';
 import Button from '../Button'
 
-const MovementJournal = ({journalData, movementId, routineId, loadJournal, refreshWorkoutData}) => {
-    const { apiUrl, refreshWorkoutData } = useContext(AppContext);
+const MovementJournal = ({journalData, movementId, loadJournal}) => {
+    const { apiUrl, routineId, refreshWorkoutData } = useContext(AppContext);
     let entryWeight = useRef();
     let entrySets = useRef();
     let entryReps = useRef();
