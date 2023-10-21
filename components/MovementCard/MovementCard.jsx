@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styles from './movementCard.module.scss'
-import Overlay from '../Overlay'
-import MovementJournal from '../MovementJournal'
-import EditMovement from '../EditMovement'
+import React, { useState, useRef, useEffect, useContext, createContext } from 'react';
+import { AppContext } from '../AppContext';
+import styles from './movementCard.module.scss';
+import Overlay from '../Overlay';
+import MovementJournal from '../MovementJournal';
+import EditMovement from '../EditMovement';
 
-const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, setId, superSets, today, apiUrl, refreshWorkoutData }) => {
+const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets, reps, movementId, routineId, setId, superSets }) => {
     let [movementJournal, setMovementJournal] = useState([]);
+    const { apiUrl, today, refreshWorkoutData } = useContext(AppContext);
+    const MovementContext = createContext({});
 
     function loadJournal() {
         const url = `${apiUrl}/journal/movement/${movementId}`;
@@ -30,10 +33,7 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
                     <MovementJournal journalData={movementJournal}
                         movementId={movementId}
                         routineId={routineId}
-                        today={today}
-                        apiUrl={apiUrl}
-                        loadJournal={loadJournal}
-                        refreshWorkoutData={refreshWorkoutData} />
+                        loadJournal={loadJournal} />
                 </Overlay>
                 <Overlay
                     title={`Edit ${displayName}`}
@@ -42,9 +42,7 @@ const MovementCard = ({displayName, slug, instruction, last_logged, weight, sets
                     <EditMovement movementId={movementId}
                         movementName={displayName}
                         setId={setId}
-                        apiUrl={apiUrl}
                         superSets={superSets}
-                        refreshWorkoutData={refreshWorkoutData}
                         routineId={routineId} />
                 </Overlay>
             </div>

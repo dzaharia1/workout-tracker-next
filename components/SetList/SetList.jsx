@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useContext } from 'react';
+import { AppContext } from '../AppContext';
 import setList from '.';
 import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
 
-const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
+const SetList = ({superSets, routineId}) => {
 
     return <section className={styles["supersets"]}>
         { superSets.map((superSet, i) => {
@@ -11,7 +12,7 @@ const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
                 <header className={styles["super-set__header"]}>
                     <h2>Superset {superSet.id}</h2>
                     {superSet.movements.map((movement, i) => {
-                        return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
+                        return <div className={movement.to_char === useContext(AppContext).today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
                     })}
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
@@ -23,12 +24,9 @@ const SetList = ({superSets, today, routineId, apiUrl, refreshWorkoutData}) => {
                             sets={movement.num_sets}
                             slug={movement.movement_slug}
                             instruction={movement.instruction}
-                            key={j}
                             movementId={movement.movement_id}
                             routineId={routineId}
-                            today={today}
-                            apiUrl={apiUrl}
-                            refreshWorkoutData = {refreshWorkoutData}
+                            key={j}
                             setId={superSet.id}
                             superSets={superSets} />
                     }) }
