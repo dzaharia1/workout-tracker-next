@@ -2,6 +2,8 @@ import React, { useState, useRef, useContext } from 'react';
 import { AppContext } from '../AppContext';
 import styles from './MovementJournal.module.scss';
 import Button from '../Button'
+import MovementAttributes from '../MovementAttributes';
+import Badge from '../Badge';
 
 const MovementJournal = ({journalData, movementId, loadJournal}) => {
     const { apiUrl, routineId, refreshWorkoutData } = useContext(AppContext);
@@ -69,39 +71,31 @@ const MovementJournal = ({journalData, movementId, loadJournal}) => {
             { journalData.map((entry, i) => {
                 if (entry.note) {
                     return <li className={styles["movement-journal__entry"]} key={i}>
+                        <div className={styles['movement-journal__badge-container']}><Badge type="instruction" /></div>
                         <div className={`${styles['movement-card__attribute']} ${styles['movement-card__attribute--date']}`}>
-                            <h4>Note from {entry.to_char}</h4>
                             <p>{entry.note}</p>
                         </div>
                     </li>
                 }
                 return <li className={styles["movement-journal__entry"]} key={i}>
-                    {entry.instruction ? 
-                        <div className={styles['movement-card__attribute--date']}><span className={styles['movement-card__completed-indicator']}>Instruction</span></div>
-                        :
-                        <div className={`${styles["movement-card__attribute"]} ${styles["movement-card__attribute--date"]}`}>
-                            <p>{entry.to_char}</p>
-                            <h4>Last logged</h4>
-                        </div>
-                    }
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.weight}</p>
-                        <h4>lbs</h4>
-                    </div>
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.sets}</p>
-                        <h4>sets</h4>
-                    </div>
-                    <div className={styles["movement-card__attribute"]}>
-                        <p>{entry.reps}</p>
-                        <h4>reps</h4>
-                    </div>
+                    <MovementAttributes last_logged={entry.to_char}
+                        weight={entry.weight}
+                        sets={entry.sets}
+                        reps={entry.reps}
+                        instruction={entry.instruction} />
                 </li>
             }) }
         </ul>
         <div className={`${styles['movement-journal__button-row']} ${buttonRowVisible && styles['movement-journal__button-row--visible']}`} id={`button-row-${movementId}`}>
-            <Button label="Add entry" id={`add-entry-${movementId}`} clickHandler={showEntryForm} />
-            <Button label="Add note" id={`add-note-${movementId}`} clickHandler={showNoteForm} />
+            <Button label="Add note"
+                id={`add-note-${movementId}`}
+                clickHandler={showNoteForm}
+                type="tertiary" />
+            <Button label="Add entry"
+                id={`add-entry-${movementId}`}
+                clickHandler={showEntryForm}
+                type="primary"
+                icon="/img/add--white.svg" />
         </div>
         <form action="" className={`${styles['movement-journal__form']} ${entryFormVisible && styles['movement-journal__form--visible']}`} id={`entry-form-${movementId}`}>
             <div className={styles["movement-journal__form-header"]}>

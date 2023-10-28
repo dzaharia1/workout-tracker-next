@@ -1,5 +1,4 @@
-@import '../../styles/utilities/utilities';
-@import '../MovementCard/movementCard.module.scss';
+@import '../../styles/utilities/manifest.module';
 
 .movement-journal {
   @extend %vertical-start;
@@ -8,10 +7,16 @@
   overflow-x: visible;
 
   &__entry {
-    @extend %horizontal-start;
+    @extend %divider-below;
+    @extend %horizontal-center;
     width: 100%;
     padding: 12px 0;
-    border-bottom: 1px lightgray solid;
+    margin-bottom: 4px;
+  }
+
+  &__badge-container {
+    @extend %horizontal-center;
+    flex: 1;
   }
 
   &__journal {

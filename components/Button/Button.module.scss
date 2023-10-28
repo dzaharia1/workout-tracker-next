@@ -1,15 +1,42 @@
-@import '../../styles/utilities/variables';
+@import '../../styles/utilities/manifest.module';
 
 .button {
-    background: none;
-    border: none;
-    border-radius: 4px;
-    background-color: white;
-    color: black;
+    @extend %horizontal-center;
+    justify-content: center;
     padding: 8px 12px;
-    // border: 4px black solid;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
-    font-size: 18px;
     transition: background-color $easing,
-        color $easing;
+    color $easing;
+    border-radius: 15px;
+    height: 40px;
+    padding: 0 24px;
+    
+    p {
+        margin-left: 12px;
+        @extend %body--strong;
+
+        &:first-child {
+            margin: 0;
+        }
+    }
+    
+    &--primary {
+        @extend .button;
+        @extend %background--primary;
+        @extend %elevation--high;
+        color: $background--lightest;
+    }
+
+    &--secondary {
+        @extend .button;
+        @extend %background--secondary;
+        @extend %elevation--high;
+        color: $text--primary;
+    }
+
+    &--tertiary {
+        @extend .button;
+        @extend %background--tertiary;
+        @extend %elevation--tiny;
+        color: $text--primary;
+    }
 }

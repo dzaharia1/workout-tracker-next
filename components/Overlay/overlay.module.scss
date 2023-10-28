@@ -22,6 +22,8 @@ $overlay-height: 90vh;
         opacity $easing,
         visibility $easing;
 
+    z-index: 1;
+
     &--fill {
         height: $overlay-height;
         top: calc((100vh - $overlay-height) / 2);

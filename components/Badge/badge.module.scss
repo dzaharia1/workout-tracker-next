@@ -1,0 +1,54 @@
+@import '../../styles/utilities/manifest.module';
+
+.badge {
+    background-color: $background--lightest;
+    border-radius: 12px;
+    overflow: hidden;
+
+    div {
+        @extend %horizontal-center;
+        padding: 4px 12px;
+        height: 24px;
+    }
+    
+    p {
+        @extend %label;
+        margin-left: 6px;
+    }
+    
+    &--note,
+    &--instruction {
+        @extend .badge;
+        
+        div {
+            @extend %background--green;
+        }
+
+        p {
+            color: $text--primary;
+        }
+    }
+
+    &--complete {
+        @extend .badge;
+
+        div {
+            @extend %background--primary;
+        }
+
+        p {
+            color: $background--lightest;
+        }
+    }
+    &--on-deck {
+        @extend .badge;
+
+        div {
+            @extend %background--secondary;
+        }
+
+        p {
+            color: $text--primary;
+        }
+    }
+}
