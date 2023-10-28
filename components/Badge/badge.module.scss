@@ -47,8 +47,9 @@
             @extend %background--secondary;
         }
 
-        p {
+        .badge__label {
             color: $text--primary;
+            margin: 0;
         }
     }
 }

@@ -24,7 +24,6 @@ const Overlay = ({triggerIcon, title, id, sizing, buttonType, onShow, children})
         <button className={`${styles["overlay__scrim"]} ${overlayVisible && styles["overlay__scrim--visible"]}`} id={id} onClick={hideOverlay}/>
         <div className={`${styles["overlay"]} ${styles[`overlay--${sizing}`]} ${overlayVisible && styles['overlay--visible']}`} id={id}>
             <div className={styles["overlay__header"]}>
-                <img className={styles['overlay__header-icon']} src={triggerIcon} alt="" />
                 <h2 className={styles['overlay__header-title']}>{ title }</h2>
                 <IconButton icon={"/img/close.svg"}
                     clickHandler={hideOverlay}

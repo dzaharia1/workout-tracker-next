@@ -1,3 +1,4 @@
+@import '../../styles/utilities/manifest.module';
 @import '../MovementJournal/MovementJournal.module.scss';
 
 .edit-movement {
@@ -6,17 +7,32 @@
     width: 100%;
 
     label {
-        text-align: left;
         width: 100%;
         margin: 0 0 16px 0;
+        
+        p {
+            @extend %label;
+        }
 
         input,
         select {
+            position: relative;
             width: 100%;
             margin-top: 8px;
-            text-align: left;
-            padding: 4px 8px;
-            height: 36px;
+        }
+
+        select {
+            appearance: none;
+
+            &:after {
+                position: absolute;
+                content: "";
+                background: url('/img/menu.svg');
+                background-size: contain;
+                width: 24px;
+                height: 24px;
+                right: 0;
+            }
         }
     }
 

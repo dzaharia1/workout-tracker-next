@@ -98,16 +98,13 @@ const MovementJournal = ({journalData, movementId, loadJournal}) => {
                 icon="/img/add--white.svg" />
         </div>
         <form action="" className={`${styles['movement-journal__form']} ${entryFormVisible && styles['movement-journal__form--visible']}`} id={`entry-form-${movementId}`}>
-            <div className={styles["movement-journal__form-header"]}>
-                <p>Add entry</p>
-                <label htmlFor="">
-                    <input
-                        type="checkbox"
-                        id={`instruction-${movementId}`}
-                        ref={entryInstruction}/>
-                    Instruction
-                </label>
-            </div>
+            <label htmlFor="">
+                <input
+                    type="checkbox"
+                    id={`instruction-${movementId}`}
+                    ref={entryInstruction}/>
+                Instruction
+            </label>
             <div className={styles["movement-journal__form-inputs"]}>
                 <label htmlFor="">
                     <input
@@ -132,8 +129,8 @@ const MovementJournal = ({journalData, movementId, loadJournal}) => {
                 </label>
             </div>
             <div className={styles['movement-journal__form-buttons']}>
-                <Button label="Save" id={`${movementId}__entry-save-button`} clickHandler={saveEntryForm} />
-                <Button label="Cancel" id={`${movementId}__entry-cancel-button`} clickHandler={hideEntryForm} />
+                <Button label="Cancel" id={`${movementId}__entry-cancel-button`} type="tertiary" clickHandler={hideEntryForm} />
+                <Button label="Save" id={`${movementId}__entry-save-button`} icon="/img/add--white.svg" clickHandler={saveEntryForm} />
             </div>
         </form>
         <form className={`${styles['movement-journal__form']} ${noteFormVisible && styles['movement-journal__form--visible']}`} id={`note-form-${movementId}`}>

@@ -7,10 +7,12 @@
   background-color: $background--lightest;
   margin-bottom: 16px;
   width: 100%;
+  overflow: hidden;
 
   &__header {
     @extend %horizontal-center;
     @extend %divider-below;
+    color: $text--primary;
     width: 100%;
     padding: 16px;
   }
@@ -28,6 +30,6 @@
 
   &__attributes-container {
     width: 100%;
-    padding: 16px 16px;
+    padding: 16px;
   }
 }

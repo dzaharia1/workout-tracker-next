@@ -3,8 +3,11 @@ import { AppContext } from '../AppContext';
 import styles from './Navigation.module.scss';
 import IconButton from '../iconButton';
 import Button from '../Button';
+import Image from 'next/image';
+import Badge from '../Badge';
 
-const Navigation = ({thisRoutine, routines, nextRoutine}) => {
+
+const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
     const {apiUrl, today} = useContext(AppContext);
     let [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
     let [menuVisible, setMenuVisible] = useState(false);
@@ -20,35 +23,46 @@ const Navigation = ({thisRoutine, routines, nextRoutine}) => {
     }
 
     function toggleMenu() {
+        console.log("clicked!");
         setMenuVisible(!menuVisible);
     }
 
-    return <header className={styles['navigation__header-bar']}>
-        <div className={styles['navigation__header-bar-section']}>
-            <IconButton icon="/img/menu.svg" clickHandler={toggleMenu} />
-        </div>
-        <div>
-            <h1>{thisRoutine.routine_name}</h1>
-            {nextRoutine.routine_id == thisRoutine.routine_id ? <span className={styles['navigation__completed-indicator']}>on deck</span>: ``}
-        </div>
-        <div className={styles['navigation__header-bar-section']}>
-            <button className={routineCompleted ? styles['navigation__completed-indicator']: styles['navigation__completed-button']} onClick={markRoutineCompleted}>complete</button>
-        </div>
-        <button className={`${styles['navigation__menu-scrim']} ${menuVisible && styles['navigation__menu-scrim--visible']}`} onClick={toggleMenu} />
-        <navigation className={`${styles['navigation__menu']} ${menuVisible && styles['navigation__menu--visible']}`}>
-            <div>
-                <IconButton icon='/img/back.svg' clickHandler={toggleMenu}></IconButton>
+    return <div>
+        <button onClick={toggleMenu} className={`${styles['navigation__menu-scrim']} ${menuVisible && styles['navigation__menu-scrim--visible']}`} />
+        <ul className={`${styles['navigation__menu']} ${menuVisible && styles['navigation__menu--visible']}`}>
+            { routines.map((routine, id) => {
+                return <li className={styles['navigation__menu-item']} key={id}>
+                    <a href={`/${routine.routine_id}`} className={styles['navigation__menu-item-header']}>
+                        <h4>{routine.routine_name}</h4>
+                        <p>last: {routine.to_char}</p>
+                    </a>
+                    {nextRoutine.routine_id == routine.routine_id && <Badge type="on-deck"/>}
+                </li>
+            })}
+        </ul>
+        <header className={`${styles['navigation__header-bar']} ${menuVisible && styles['navigation__header-bar--menu-visible']}`} onClick={toggleMenu}>
+            <Image src={menuVisible? `/img/expand.svg` : "/img/menu.svg"} width="24px" height="24px" />
+            <div className={styles['navigation__title']}>
                 <h1>{thisRoutine.routine_name}</h1>
+                { thisRoutine.routine_id == nextRoutine.routine_id ?
+                    <p className={styles['navigation__title-on-deck-indicator']}>on deck</p> :
+                    <p className={styles['navigation__title-last-indicator']}>last: {thisRoutine.to_char}</p> }
             </div>
-            <ul>
-                {routines.map((routine, id) => <li className={styles['navigation__menu-item']} key={id}>
-                    <a href={`/${routine.routine_id}`}>{routine.routine_name}</a>
-                    {(nextRoutine.routine_id == routine.routine_id) ? <span className={styles['navigation__completed-indicator']}>on deck</span> : <span></span>}
-                    <p>Last: {routine.to_char}</p>
-                </li>)}
-            </ul>
-        </navigation>
-    </header>
+            {!routineCompleted &&
+                <div className={styles['navigation__progress-bar']}>
+                    { superSets.map((superSet, i) => {
+                        return superSet.movements.map((movement, j) => {
+                            return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={(i + 1) * (j + 1)}></div>
+                        })
+                    })}
+                </div>
+            }
+            {routineCompleted ?
+                <Button icon="/img/complete.svg" type="complete" label="complete"></Button> :
+                <IconButton icon="/img/complete.svg" type="tertiary" clickHandler={markRoutineCompleted}/>
+            }
+        </header>
+    </div>
 }
 
 export default Navigation;

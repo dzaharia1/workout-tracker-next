@@ -6,7 +6,7 @@ const Badge = ({type, icon}) => {
         <div>
             {type === "instruction" && <Image src="/img/instruction.svg" width="16px" height="16px" />}
             {type === "complete" && <Image src="/img/complete--white.svg" width="16px" height="16px" />}
-            <p>{type}</p>
+            <p className={styles['badge__label']}>{type == 'on-deck' ? "on deck" : type}</p>
         </div>
     </div>
 }
