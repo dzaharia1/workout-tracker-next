@@ -1,0 +1,38 @@
+@import '../../styles/utilities/manifest.module';
+
+.movement-attributes {
+    @extend %horizontal-center;
+    width: 100%;
+
+    &__attribute {
+        width: 40px;
+        margin-left: 16px;
+
+        p {
+            @extend %body;
+            margin-bottom: 4px;
+        }
+
+        span {
+            @extend %label;
+            color: $text--secondary;
+        }
+    }
+
+    &__last-logged {
+        @extend .movement-attributes__attribute;
+        width: none;
+        flex: 1;
+        margin: 0;
+    }
+
+    &__right-region {
+        @extend %horizontal-center;
+        justify-content: flex-end;
+        flex: 1;
+    }
+}
+
+.divider {
+    @extend %divider-below;
+}

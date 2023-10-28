@@ -1,109 +1,90 @@
-@import '../../styles/utilities/utilities';
+@import '../../styles/utilities/manifest.module';
+@import '../SetList/setList.module.scss';
 
-$menu-height: 95vh;
-$menu-width: 70vw;
+$header-height: 86px;
 
 .navigation {
     &__header-bar {
         @extend %horizontal-center;
-        justify-content: space-between;
+        @extend %elevation--high;
         position: fixed;
         left: 0;
-        top: 0;
+        bottom: 0;
         right: 0;
         padding: 0 $padding;
         height: $header-height;
-        background-color: white;
-    
-        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 1px;
+        background-color: $background--lightest;
+        transition: box-shadow $easing;
 
-        @media screen and (min-width: 600px) {
-            padding: 0 calc((100vw - $site-max-width) / 2 + $padding);
+        &--menu-visible {
+            box-shadow: none;
+        }
+    }
+
+    &__title {
+        flex: 1;
+        margin-left: 8px;
+
+        &-last-indicator {
+            @extend %label;
+            color: $text--secondary;
         }
 
-        &-section,
-        h1 {
+        &-on-deck-indicator {
+            @extend %label;
+            color: $orange;
+        }
+
+    }
+
+    &__progress-bar {
+        @extend %horizontal-center;
+        width: 40%;
+
+        .super-set__complete-indicator {
             flex: 1;
-        }
-
-        h1 {
-            font-size: 22px;
-            text-align: center;
-            margin-right: 12px
-        }
-
-        div {
-            @extend %horizontal-center;
-            justify-content: flex-start;
-
-            &:last-of-type {
-                justify-content: flex-end;
-            }
-        }
-
-        .icon-button {
-            margin-right: $padding;
         }
     }
 
     &__menu {
-        @extend %vertical-start;
-        justify-content: flex-start;
-        
         position: fixed;
-        top: calc((100vh - $menu-height) / 2);
-        left: 5vw;
-        width: $menu-width;
-        max-width: 375px;
-        height: $menu-height;
-        
-        border-radius: 6px;
-        padding: $padding;
-        
-        background-color: transparentize(white, .92);
-        backdrop-filter: $backdropFilter;
-        box-shadow: $box-shadow;
-        
-        transform: scale(.7) translateX(-180px);
+        bottom: -100vh;
+        left: 0;
+        right: 0;
+        padding: 0 $padding;
+        border-radius: 15px 15px 0 0;
+        background-color: $background--lightest;
         opacity: 0;
-        visibility: hidden;
-        transition: transform $easing,
-            opacity $easing,
-            visibility $easing;
-
+        transition: bottom $easing,
+            opacity $easing;
+        
         &--visible {
-            visibility: visible;
+            bottom: $header-height;
             opacity: 1;
-            transform: scale(1);
-        }
-
-        div {
-            @extend %horizontal-center;
-            button {
-                margin-right: 16px;
-            }
-        }
-
-        ul {
-            width: 100%;
-            padding-top: $padding;
+            transition: bottom $easing;
         }
 
         &-item {
+            @extend %divider-below;
             @extend %horizontal-center;
-            flex-wrap: wrap;
             width: 100%;
-            margin-bottom: 24px;
-
-            a {
+            padding: $padding 0;
+            
+            &-header {
+                @extend %horizontal-end;
                 flex: 1;
+            }
+
+            h4 {
+                font-size: 18px;
                 font-weight: 600;
-                margin-bottom: 4px;
+                margin-right: 8px;
             }
 
             p {
-                width: 100%;
-                font-size: 12px;
+                @extend %label;
+                color: $text--secondary;
+                margin-bottom: 1px;
             }
         }
 
@@ -111,7 +92,7 @@ $menu-width: 70vw;
             position: fixed;
             top: 0;
             right: 0;
-            bottom: 0;
+            bottom: $header-height;
             width: 100vw;
             background-color: $scrim__background-color;
             backdrop-filter: $scrim__backdrop-filter;
@@ -126,15 +107,5 @@ $menu-width: 70vw;
                 opacity: 1;
             }
         }
-    }
-
-    &__completed-indicator {
-        @extend %completed-indicator;
-    }
-
-    &__completed-button {
-        @extend %completed-indicator;
-        background-color: lightgray;
-        color: black;
     }
 }

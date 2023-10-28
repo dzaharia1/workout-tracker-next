@@ -1,7 +1,31 @@
+@import '../../styles/utilities/utilities';
+@import '../../styles/utilities/colors';
+@import '../../styles/utilities/variables';
+
 .icon-button {
-    width: 24px;
-    height: 24px;
-    // background-color: white;
-    background-position: center center;
-    background-size: cover;
+    @extend %vertical-center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 15px;
+    margin-left: 12px;
+
+    &--primary {
+        @extend .icon-button;
+        @extend %background--primary;
+        @extend %elevation--high;
+    }
+
+    &--secondary {
+        @extend .icon-button;
+        @extend %background--secondary;
+        @extend %elevation--high;
+    }
+
+    &--tertiary {
+        @extend .icon-button;
+        @extend %background--tertiary;
+        @extend %elevation--tiny;
+    }
 }

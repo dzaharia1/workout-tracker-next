@@ -1,9 +1,10 @@
-@import '../../styles/utilities/utilities';
+@import '../../styles/utilities/manifest.module';
 
 .supersets {
   @extend %vertical-start;
   width: 100%;
-  margin-top: $header-height + $padding;
+  margin-top: 24px;
+  margin-bottom: 90px;
 }
 
 .super-set {
@@ -15,11 +16,18 @@
   &__header {
     @extend %horizontal-center;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 
     h2 {
       margin-right: 12px;
     }
+  }
+
+  &__header-rule-line {
+    height: 1px;
+    background-color: transparentize(#000000, .2);
+    flex: 1;
+    margin-right: 12px;
   }
 
   &__movement-list {
@@ -28,15 +36,20 @@
   }
 
   &__complete-indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 14px;
-    border: 2px black solid;
-    margin-right: 8px;
+    @extend %elevation--tiny;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    margin-right: 4px;
+
+    &--to-do {
+      @extend .super-set__complete-indicator;
+      @extend %background--tertiary;
+    }
 
     &--complete {
       @extend .super-set__complete-indicator;
-      background-color: black;
+      @extend %background--primary;
     }
   }
 }

@@ -1,8 +1,8 @@
 import React, { useState, useRef, useContext } from 'react';
 import { AppContext } from '../AppContext';
-import setList from '.';
 import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
+import IconButton from '../iconButton';
 
 const SetList = ({superSets}) => {
     const {today} = useContext(AppContext);
@@ -12,9 +12,11 @@ const SetList = ({superSets}) => {
             return <div className={styles["super-set"]} key={i}>
                 <header className={styles["super-set__header"]}>
                     <h2>Superset {superSet.id}</h2>
+                    <div className={styles['super-set__header-rule-line']}></div>
                     {superSet.movements.map((movement, i) => {
-                        return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator']} key={i}></div>
+                        return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={i}></div>
                     })}
+                    <IconButton icon="/img/add.svg" type="tertiary" />
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
                     { superSet.movements.map((movement, j) => {

@@ -53,12 +53,13 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
           <meta name="mobile-web-app-capable" content="yes"/>
           <meta name="apple-mobile-web-app-capable" content="yes"/>
           <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
-          <meta name="theme-color" content="#232338"/>
+          <meta name="theme-color" content="#eeeeee"/>
         </Head>
+        <SetList superSets={superSets} />
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
-          routines={routineData} />
-        <SetList superSets={superSets} />
+          routines={routineData}
+          superSets={superSets} />
       </main>
     </AppContext.Provider>
   )

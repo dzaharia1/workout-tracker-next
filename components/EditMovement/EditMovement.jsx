@@ -57,13 +57,16 @@ const EditMovement = ({movementId, movementName, setId, superSets, hideOverlay})
                 </select>
             </label>
             <div className={styles["movement-journal__form-buttons"]}>
-                <Button label={movementDeleteConfirm == 1 ? `Confirm delete?` : `Delete`} 
+                <Button label={movementDeleteConfirm == 1 ? `confirm delete?` : `delete`} 
                     id={`${movementId}__edit-save-form`} 
                     additionalClass={styles[`edit-movement__delete-confirmation-stage-${movementDeleteConfirm}`]}  
-                    clickHandler={deleteMovement} />
-                <Button label="Save" 
+                    clickHandler={deleteMovement}
+                    type="tertiary" />
+                <Button label="save" 
                     id={`${movementId}__edit-save-form`} 
-                    clickHandler={saveEditForm} />
+                    clickHandler={saveEditForm}
+                    type="primary"
+                    icon="/img/add--white.svg" />
             </div>
         </form>
 }

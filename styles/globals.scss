@@ -1,20 +1,24 @@
-@import './utilities/_resets.scss';
-@import './utilities/_utilities.scss';
+@import './utilities/resets';
+@import './utilities/manifest.module';
+
+$inter: 'Inter', helvetica, sans-serif;
 
 html,
 body {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: white;
+  font-family: $inter;
   color: black;
 
   #__next {
     @extend %vertical-center;
     width: 100%;
   }
+}
+
+body {
+  background-color: $background--base;
 }
 
 a {
@@ -27,20 +31,20 @@ ol {
   list-style: none;
 }
 
+h1 {
+  @extend %h1;
+}
+
 h2 {
-  font-size: 18px;
+  @extend %h2;
 }
 
 h3 {
-  font-size: 16px;
-}
-
-h4 {
-  font-size: 12px;
+  @extend %h3;
 }
 
 p {
-  font-size: 14px;
+  @extend %body;
 }
 
 main {
