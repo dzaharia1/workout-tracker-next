@@ -46,6 +46,10 @@ $header-height: 86px;
         }
     }
 
+    &__confirmation-bar {
+        @extend %horizontal-center;
+    }
+
     &__menu {
         position: fixed;
         bottom: -100vh;

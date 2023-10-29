@@ -71,7 +71,7 @@ const MovementJournal = ({journalData, movementId, loadJournal}) => {
             { journalData.map((entry, i) => {
                 if (entry.note) {
                     return <li className={styles["movement-journal__entry"]} key={i}>
-                        <div className={styles['movement-journal__badge-container']}><Badge type="instruction" /></div>
+                        <div className={styles['movement-journal__badge-container']}><Badge type="instruction" icon="/img/instruction.svg" /></div>
                         <div className={`${styles['movement-card__attribute']} ${styles['movement-card__attribute--date']}`}>
                             <p>{entry.note}</p>
                         </div>

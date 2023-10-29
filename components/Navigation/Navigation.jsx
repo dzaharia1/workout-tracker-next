@@ -9,8 +9,9 @@ import Badge from '../Badge';
 
 const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
     const {apiUrl, today} = useContext(AppContext);
-    let [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
-    let [menuVisible, setMenuVisible] = useState(false);
+    const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [confirmCompleted, setConfirmCompleted] = useState(false);
 
     function markRoutineCompleted() {
         fetch(`${apiUrl}/routine/markComplete/${thisRoutine.routine_id}`, {
@@ -19,6 +20,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
         }).then(data => {
             console.log(data);
             setRoutineCompleted(true);
+            setConfirmCompleted(false);
         })
     }
 
@@ -40,15 +42,15 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 </li>
             })}
         </ul>
-        <header className={`${styles['navigation__header-bar']} ${menuVisible && styles['navigation__header-bar--menu-visible']}`} onClick={toggleMenu}>
-            <Image src={menuVisible? `/img/expand.svg` : "/img/menu.svg"} width="24px" height="24px" />
-            <div className={styles['navigation__title']}>
+        <header className={`${styles['navigation__header-bar']} ${menuVisible && styles['navigation__header-bar--menu-visible']}`}>
+            <Image src={menuVisible? `/img/expand.svg` : "/img/menu.svg"} width="24px" height="24px" onClick={toggleMenu} />
+            <div className={styles['navigation__title']} onClick={toggleMenu}>
                 <h1>{thisRoutine.routine_name}</h1>
                 { thisRoutine.routine_id == nextRoutine.routine_id ?
                     <p className={styles['navigation__title-on-deck-indicator']}>on deck</p> :
                     <p className={styles['navigation__title-last-indicator']}>last: {thisRoutine.to_char}</p> }
             </div>
-            {!routineCompleted &&
+            {(!routineCompleted && !confirmCompleted) &&
                 <div className={styles['navigation__progress-bar']}>
                     { superSets.map((superSet, i) => {
                         return superSet.movements.map((movement, j) => {
@@ -58,8 +60,26 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 </div>
             }
             {routineCompleted ?
-                <Button icon="/img/complete.svg" type="complete" label="complete"></Button> :
-                <IconButton icon="/img/complete.svg" type="tertiary" clickHandler={markRoutineCompleted}/>
+                <Button 
+                    icon="/img/complete.svg" 
+                    type="complete" 
+                    label="complete" /> :
+                confirmCompleted ?
+                    <div className={styles['navigation__confirmation-bar']}>
+                        <Button
+                            icon="/img/complete.svg"
+                            type="secondary"
+                            label="mark complete?"
+                            clickHandler={markRoutineCompleted} />
+                        <IconButton
+                            icon="/img/close.svg"
+                            type="tertiary"
+                            clickHandler={() => setConfirmCompleted(false)}/>
+                    </div> :
+                    <IconButton
+                        icon="/img/complete.svg"
+                        type="tertiary"
+                        clickHandler={() => setConfirmCompleted(true)}/>
             }
         </header>
     </div>
