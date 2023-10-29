@@ -83,7 +83,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                     </div> :
                     <IconButton
                         icon="/img/complete.svg"
-                        type="tertiary"
+                        type="secondary"
                         clickHandler={() => setConfirmCompleted(true)}/>
             }
         </header>
