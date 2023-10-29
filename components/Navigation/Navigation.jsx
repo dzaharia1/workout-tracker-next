@@ -25,12 +25,13 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
     }
 
     function toggleMenu() {
-        console.log("clicked!");
         setMenuVisible(!menuVisible);
     }
 
     return <div>
-        <button onClick={toggleMenu} className={`${styles['navigation__menu-scrim']} ${menuVisible && styles['navigation__menu-scrim--visible']}`} />
+        <button
+            onClick={toggleMenu}
+            className={`${styles['navigation__menu-scrim']} ${menuVisible && styles['navigation__menu-scrim--visible']}`} />
         <ul className={`${styles['navigation__menu']} ${menuVisible && styles['navigation__menu--visible']}`}>
             { routines.map((routine, id) => {
                 return <li className={styles['navigation__menu-item']} key={id}>
@@ -43,7 +44,11 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
             })}
         </ul>
         <header className={`${styles['navigation__header-bar']} ${menuVisible && styles['navigation__header-bar--menu-visible']}`}>
-            <Image src={menuVisible? `/img/expand.svg` : "/img/menu.svg"} width="24px" height="24px" onClick={toggleMenu} />
+            <Image
+                src={menuVisible? `/img/expand.svg` : "/img/menu.svg"}
+                width="24px"
+                height="24px"
+                onClick={toggleMenu} />
             <div className={styles['navigation__title']} onClick={toggleMenu}>
                 <h1>{thisRoutine.routine_name}</h1>
                 { thisRoutine.routine_id == nextRoutine.routine_id ?
