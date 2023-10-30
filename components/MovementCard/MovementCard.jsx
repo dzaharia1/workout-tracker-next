@@ -21,7 +21,7 @@ const MovementCard = ({movementInfo, setId, superSets }) => {
         });
     }
 
-    return <div className={styles["movement-card"]}>
+    return <li className={styles["movement-card"]}>
         <div className={styles["movement-card__header"]}>
             {movementInfo.last_logged === today && <div className={styles['movement-card__completed-indicator']}><Badge type="complete" /></div>}
             <h3>{ movementInfo.displayName }</h3>
@@ -56,7 +56,7 @@ const MovementCard = ({movementInfo, setId, superSets }) => {
                 reps={movementInfo.reps}
                 instruction={movementInfo.instruction} />
         </div>
-    </div>
+    </li>
 }
 
 export default MovementCard;
