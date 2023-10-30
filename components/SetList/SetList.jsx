@@ -22,7 +22,7 @@ const SetList = ({superSets}) => {
                     { superSet.movements.map((movement, j) => {
                         const movementInfo = {
                             displayName: movement.movement_name,
-                            last_logged: movement.to_char,
+                            last_logged: movement.last_logged,
                             weight: movement.weight,
                             sets: movement.num_sets,
                             reps: movement.num_reps,
