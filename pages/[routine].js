@@ -102,17 +102,4 @@ export async function getServerSidePaths() {
         paths,
         fallback: false
     }
-//   const apiUrl = process.env.API_URL;
-//   const signIds = await fetch(`${apiUrl}/signids`).then(data => data.json());
-//   const paths = signIds.map((item) => {
-//     return {
-//       params: {
-//         sign: item.sign_id
-//       }
-//     }
-//   })
-  return {
-    paths,
-    fallback: false
-  }
 }

@@ -8,8 +8,8 @@ import Badge from '../Badge';
 
 
 const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
-    const {apiUrl, today} = useContext(AppContext);
-    const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.to_char === today);
+    const {apiUrl, today, refreshWorkoutData} = useContext(AppContext);
+    const [routineCompleted, setRoutineCompleted] = useState(thisRoutine.last_logged === today);
     const [menuVisible, setMenuVisible] = useState(false);
     const [confirmCompleted, setConfirmCompleted] = useState(false);
 
@@ -18,10 +18,20 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
             method: 'POST',
             mode: 'no-cors'
         }).then(data => {
-            console.log(data);
             setRoutineCompleted(true);
             setConfirmCompleted(false);
+            refreshWorkoutData();
         })
+    }
+
+    function unMarkRoutineCompleted() {
+        fetch(`${apiUrl}/routine/unmarkcomplete/${thisRoutine.routine_id}`, {
+            method: 'POST',
+            mode: 'no-cors'
+        }).then(data => {
+            setRoutineCompleted(false);
+            refreshWorkoutData();
+        });
     }
 
     function toggleMenu() {
@@ -37,7 +47,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 return <li className={styles['navigation__menu-item']} key={id}>
                     <a href={`/${routine.routine_id}`} className={styles['navigation__menu-item-header']}>
                         <h4>{routine.routine_name}</h4>
-                        <p>last: {routine.to_char}</p>
+                        <p>last: {routine.last_logged}</p>
                     </a>
                     {nextRoutine.routine_id == routine.routine_id && <Badge type="on-deck"/>}
                 </li>
@@ -53,13 +63,13 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 <h1>{thisRoutine.routine_name}</h1>
                 { thisRoutine.routine_id == nextRoutine.routine_id ?
                     <p className={styles['navigation__title-on-deck-indicator']}>on deck</p> :
-                    <p className={styles['navigation__title-last-indicator']}>last: {thisRoutine.to_char}</p> }
+                    <p className={styles['navigation__title-last-indicator']}>last: {thisRoutine.last_logged}</p> }
             </div>
             {(!routineCompleted && !confirmCompleted) &&
                 <div className={styles['navigation__progress-bar']}>
                     { superSets.map((superSet, i) => {
                         return superSet.movements.map((movement, j) => {
-                            return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={(i + 1) * (j + 1)}></div>
+                            return <div className={movement.last_logged === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={(i + 1) * (j + 1)}></div>
                         })
                     })}
                 </div>
@@ -68,7 +78,8 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 <Button 
                     icon="/img/complete.svg" 
                     type="complete" 
-                    label="complete" /> :
+                    label="complete"
+                    clickHandler={unMarkRoutineCompleted} /> :
                 confirmCompleted ?
                     <div className={styles['navigation__confirmation-bar']}>
                         <Button
