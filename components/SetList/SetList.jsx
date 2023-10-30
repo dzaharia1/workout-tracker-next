@@ -16,7 +16,7 @@ const SetList = ({superSets}) => {
                     {superSet.movements.map((movement, i) => {
                         return <div className={movement.to_char === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={i}></div>
                     })}
-                    <IconButton icon="/img/add.svg" type="tertiary" />
+                    {/* <IconButton icon="/img/add.svg" type="tertiary" /> */}
                 </header>
                 <ul className={styles["super-set__movement-list"]}>
                     { superSet.movements.map((movement, j) => {
