@@ -7,7 +7,7 @@
     &__card {
         @extend %horizontal-center;
         @extend %elevation--low;
-        justify-content: space-between;
+        // justify-content: space-between;
         width: 100%;
         padding: $padding 18px;
         background-color: $background--lightest;
@@ -19,13 +19,15 @@
     }
 
     h1 {
-        flex: 1;
+        @extend %h2;
         margin-left: 8px;
         font-weight: 600;
+        flex: 1;
     }
     
     p {
+        @extend %label;
         color: $text--secondary;
-        // margin-bottom: 4px;
+        margin-top: 6px;
     }
 }
