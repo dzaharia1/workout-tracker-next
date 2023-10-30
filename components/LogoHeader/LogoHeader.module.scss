@@ -1,0 +1,31 @@
+@import '../../styles/utilities/manifest.module';
+
+.header {
+    width: 100%;
+    padding: $padding;
+    
+    &__card {
+        @extend %horizontal-center;
+        @extend %elevation--low;
+        justify-content: space-between;
+        width: 100%;
+        padding: $padding 18px;
+        background-color: $background--lightest;
+        border-radius: 15px;
+
+        div {
+            @extend %vertical-end;
+        }
+    }
+
+    h1 {
+        flex: 1;
+        margin-left: 12px;
+        font-weight: 700;
+    }
+    
+    p {
+        color: $text--secondary;
+        // margin-bottom: 4px;
+    }
+}

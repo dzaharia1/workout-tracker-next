@@ -53,7 +53,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 </li>
             })}
         </ul>
-        <header className={`${styles['navigation__header-bar']} ${menuVisible && styles['navigation__header-bar--menu-visible']}`}>
+        <div className={`${styles['navigation__footer-bar']} ${menuVisible && styles['navigation__footer-bar--menu-visible']}`}>
             <Image
                 src={menuVisible? `/img/expand.svg` : "/img/menu.svg"}
                 width="24px"
@@ -97,7 +97,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                         type="secondary"
                         clickHandler={() => setConfirmCompleted(true)}/>
             }
-        </header>
+        </div>
     </div>
 }
 

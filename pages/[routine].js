@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Navigation from '../components/Navigation';
 import SetList from '../components/SetList';
+import LogoHeader from '../components/LogoHeader';
 
 export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
@@ -55,6 +56,7 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
           <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
           <meta name="theme-color" content="#eeeeee"/>
         </Head>
+        <LogoHeader today={today} />
         <SetList superSets={superSets} />
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
