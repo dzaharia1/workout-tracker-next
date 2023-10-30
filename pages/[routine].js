@@ -56,7 +56,7 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
           <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
           <meta name="theme-color" content="#eeeeee"/>
         </Head>
-        <LogoHeader today={today} />
+        <LogoHeader />
         <SetList superSets={superSets} />
         <Navigation thisRoutine={thisRoutine}
           nextRoutine={nextRoutine}
