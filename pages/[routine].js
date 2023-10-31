@@ -7,14 +7,18 @@ import Navigation from '../components/Navigation';
 import SetList from '../components/SetList';
 import LogoHeader from '../components/LogoHeader';
 
-export default function Home({ workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
+export default function Home({ movements, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
-  let [superSets, setSuperSets] = useState([]);
-  let routineId = thisRoutine['routine_id'];
+  const [superSets, setSuperSets] = useState([]);
+  const [routineDataLocal, setRoutineDataLocal] = useState(routineData);
+  const [thisRoutineLocal, setThisRoutineLocal] = useState(thisRoutine);
+  const [nextRoutineLocal, setNextRoutineLocal] = useState(nextRoutine);
+
+  let routineId = thisRoutineLocal['routine_id'];
 
   const formatWorkoutData = (data) => {
     let updatedSuperSets = [];
-    let rawData = data || workoutData;
+    let rawData = data || movements;
 
     for (let movement of rawData) {
       const superSetId = movement.set_id - 1;
@@ -35,13 +39,17 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
     fetch(url, {accept: "application/json"})
       .then(data => data.json())
       .then(data => {
-        superSets = formatWorkoutData(data.movements);
+        console.log(data);
+        setRoutineDataLocal(data.routines);
+        formatWorkoutData(data.movements);
+        setThisRoutineLocal(data.thisRoutine);
+        setNextRoutineLocal(data.nextRoutine);
       })
   }
   
   useEffect(() => {
     formatWorkoutData()
-  }, [workoutData]);
+  }, [movements]);
 
   return (
     <AppContext.Provider value={{apiUrl, today, routineId, refreshWorkoutData}}>
@@ -58,9 +66,9 @@ export default function Home({ workoutData, routineData, thisRoutine, nextRoutin
         </Head>
         <LogoHeader routine={thisRoutine.routine_name} />
         <SetList superSets={superSets} />
-        <Navigation thisRoutine={thisRoutine}
-          nextRoutine={nextRoutine}
-          routines={routineData}
+        <Navigation thisRoutine={thisRoutineLocal}
+          nextRoutine={nextRoutineLocal}
+          routines={routineDataLocal}
           superSets={superSets} />
       </main>
     </AppContext.Provider>
@@ -71,7 +79,7 @@ export async function getServerSideProps({params}) {
   const apiUrl = process.env.API_URL || `http://localhost:3333`;
   const routineId = params.routine
   let routineData,
-      workoutData,
+      movements,
       thisRoutine,
       nextRoutine,
       today;
@@ -80,13 +88,13 @@ export async function getServerSideProps({params}) {
   .then (data => data.json())
   .then (data => {
     routineData = data.routines;
-    workoutData = data.movements;
+    movements = data.movements;
     thisRoutine = data.thisRoutine;
     nextRoutine = data.nextRoutine;
     today = data.todaysDate;
   })
 
-  return { props: { workoutData, routineData, thisRoutine, nextRoutine, today, apiUrl } }
+  return { props: { movements, routineData, thisRoutine, nextRoutine, today, apiUrl } }
 }
 
 export async function getServerSidePaths() {
