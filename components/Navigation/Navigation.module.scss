@@ -1,8 +1,6 @@
 @import '../../styles/utilities/manifest.module';
 @import '../SetList/setList.module.scss';
 
-$header-height: 86px;
-
 .navigation {
     &__footer-bar {
         @extend %horizontal-center;
@@ -28,13 +26,16 @@ $header-height: 86px;
         &-last-indicator {
             @extend %label;
             color: $text--secondary;
+
+            &--today {
+                color: $purple;
+            }
         }
 
         &-on-deck-indicator {
             @extend %label;
             color: $orange;
         }
-
     }
 
     &__progress-bar {
@@ -61,6 +62,8 @@ $header-height: 86px;
         opacity: 0;
         transition: bottom $easing,
             opacity $easing;
+
+        z-index: 1000;
         
         &--visible {
             bottom: $header-height;
@@ -86,8 +89,6 @@ $header-height: 86px;
             }
 
             p {
-                @extend %label;
-                color: $text--secondary;
                 margin-bottom: 1px;
             }
         }

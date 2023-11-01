@@ -5,11 +5,13 @@
 .icon-button {
     @extend %vertical-center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: 15px;
-    margin-left: 12px;
+    padding: 8px;
+    border-radius: 16px;
+    
+    &__container {
+        border-radius: 16px;
+        background-color: $background--lightest;
+    }
 
     &--primary {
         @extend .icon-button;
