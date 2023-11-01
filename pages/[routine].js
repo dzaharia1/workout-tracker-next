@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Navigation from '../components/Navigation';
 import SetList from '../components/SetList';
 import LogoHeader from '../components/LogoHeader';
+import CompleteButton from '../components/CompleteButton';
 
 export default function Home({ movements, routineData, thisRoutine, nextRoutine, today, apiUrl }) {
   const router = useRouter();
@@ -70,6 +71,7 @@ export default function Home({ movements, routineData, thisRoutine, nextRoutine,
           nextRoutine={nextRoutineLocal}
           routines={routineDataLocal}
           superSets={superSets} />
+        <CompleteButton thisRoutine={thisRoutineLocal} />
       </main>
     </AppContext.Provider>
   )

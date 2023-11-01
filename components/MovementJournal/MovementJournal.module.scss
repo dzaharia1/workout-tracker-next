@@ -27,24 +27,21 @@
 
   &__button-row {
     @extend %horizontal-center;
-    flex-shrink: none;
     justify-content: center;
     width: 100%;
     padding: 16px 0;
     overflow: visible;
     display: none;
+    gap: $padding;
 
     &--visible {
         display: flex;
     }
 
+    div,
     button {
       flex: 1;
       margin: 0;
-
-      &:first-of-type {
-        margin-right: 12px;
-      }
     }
   }
 
@@ -132,14 +129,12 @@
           @extend %horizontal-center;
           width: 100%;
           margin-top: 12px;
+          gap: $padding;
 
+          div,
           button {
               flex: 1;
               margin: 0;
-
-              &:first-of-type {
-                  margin-right: 12px;
-              }
           }
       }
   }

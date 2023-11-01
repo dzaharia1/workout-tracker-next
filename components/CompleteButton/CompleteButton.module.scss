@@ -1,0 +1,14 @@
+@import '../../styles/utilities/manifest.module';
+@import '../Navigation/Navigation.module.scss';
+
+.complete-button {
+    position: fixed;
+    bottom: $header-height + $padding;
+    right: $padding;
+    border-radius: 15px;
+
+    &__confirm-mode {
+        @extend %horizontal-center;
+        gap: $padding;
+    }
+}

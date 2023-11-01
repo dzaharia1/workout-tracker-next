@@ -144,8 +144,13 @@ const MovementJournal = ({journalData, movementId, loadJournal}) => {
                 </label>
             </div>
             <div className={styles['movement-journal__form-buttons']}>
-                <Button label="Save" id={`${movementId}__note-save-button`} clickHandler={saveNoteForm} />
-                <Button label="Cancel" id={`${movementId}__note-cancel-button`} clickHandler={hideNoteForm} />
+                <Button label="Cancel"
+                    id={`${movementId}__note-cancel-button`}
+                    clickHandler={hideNoteForm}
+                    type="tertiary" />
+                <Button label="Save"
+                    id={`${movementId}__note-save-button`}
+                    clickHandler={saveNoteForm} />
             </div>
         </form>
     </div>

@@ -3,7 +3,7 @@
 .supersets {
   @extend %vertical-start;
   width: 100%;
-  margin-bottom: 90px;
+  margin-bottom: $header-height + (3 * $padding);
 }
 
 .super-set {

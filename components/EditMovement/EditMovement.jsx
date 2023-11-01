@@ -65,8 +65,7 @@ const EditMovement = ({movementId, movementName, setId, superSets, hideOverlay})
                 <Button label="save" 
                     id={`${movementId}__edit-save-form`} 
                     clickHandler={saveEditForm}
-                    type="primary"
-                    icon="/img/add--white.svg" />
+                    type="primary" />
             </div>
         </form>
 }
