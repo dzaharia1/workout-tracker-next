@@ -40,6 +40,7 @@
 
     &__progress-bar {
         @extend %horizontal-center;
+        margin-right: 12px;
         // flex: 1;
 
         .super-set__complete-indicator {

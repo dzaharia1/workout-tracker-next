@@ -5,6 +5,8 @@ import IconButton from '../iconButton';
 import Button from '../Button';
 import Image from 'next/image';
 import Badge from '../Badge';
+import Overlay from '../Overlay';
+import Calendar from 'react-calendar';
 
 
 const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
@@ -55,6 +57,13 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                     })
                 })}
             </div>
+            <Overlay
+                title="Journal"
+                triggerIcon="/img/journal.svg"
+                sizing="hug"
+                buttonType="tertiary">
+                    <Calendar></Calendar>
+            </Overlay>
         </div>
 
     </div>
