@@ -1,0 +1,12 @@
+@import '../../node_modules/react-calendar/dist/Calendar.css';
+
+.Calendar {
+  width: 100%;
+
+  .react-calendar {
+    &__month-view__days__day {
+      background-color: salmon;
+    }
+  }
+
+}

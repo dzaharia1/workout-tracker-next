@@ -30,4 +30,9 @@
         @extend %background--tertiary;
         @extend %elevation--tiny;
     }
+
+    &--none {
+        @extend .icon-button;
+        background: none;
+    }
 }

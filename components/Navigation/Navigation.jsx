@@ -5,14 +5,27 @@ import IconButton from '../iconButton';
 import Button from '../Button';
 import Image from 'next/image';
 import Badge from '../Badge';
+import Overlay from '../Overlay';
+import Calendar from 'react-calendar';
 
 
 const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
-    const {today} = useContext(AppContext);
+    const {apiUrl, today} = useContext(AppContext);
     const [menuVisible, setMenuVisible] = useState(false);
+    const [routineJournal, setRoutineJournal] = useState([]);
 
     function toggleMenu() {
         setMenuVisible(!menuVisible);
+    }
+
+    function loadRoutineJournal() {
+        const url = `${apiUrl}/routineJournal`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setRoutineJournal(data);
+                // console.log(routineJournal);
+            })
     }
 
     return <div>
@@ -55,6 +68,35 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                     })
                 })}
             </div>
+            <Overlay
+                title="Journal"
+                onShow={loadRoutineJournal}
+                triggerIcon="/img/journal.svg"
+                sizing="hug"
+                buttonType="tertiary">
+                    <Calendar
+                        prevLabel={<IconButton type="none" icon="/img/back.svg" />}
+                        nextLabel={<IconButton type="none" icon="/img/next.svg" />}
+                        next2Label={null}
+                        prev2Label={null}
+                        maxDate={new Date()}
+                        tileContent={({ date }) => {
+                            const thisTileDate = `${date.getMonth() + 1} ${date.getDate()}, ${date.getFullYear()}`;
+
+                            for (let journalItem of routineJournal) {
+                                // console.log(journalItem.pretty_date)
+                                if (thisTileDate === journalItem.pretty_date) {
+                                    return <div className={styles['Calendar__routine_log']}>
+                                        <p>{date.getDate()}</p>
+                                        <p>{journalItem.routine_name.substring(4)}</p>
+                                    </div>
+                                }
+                            }
+                        }}
+                        tileDisabled={() => {return true}}
+                        maxDetail="month"
+                        />
+            </Overlay>
         </div>
 
     </div>

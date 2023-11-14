@@ -40,6 +40,7 @@
 
     &__progress-bar {
         @extend %horizontal-center;
+        margin-right: 12px;
         // flex: 1;
 
         .super-set__complete-indicator {
@@ -111,6 +112,30 @@
                 visibility: visible;
                 opacity: 1;
             }
+        }
+    }
+}
+
+.Calendar {
+    &__routine_log {
+        @extend %vertical-center;
+        @extend %label;
+        justify-content: center;
+        color: $background--lightest;
+        background: $gradient--primary;
+        width: 36px;
+        border-radius: 17px;
+        padding: 8px 8px;
+        margin-top: -26px;
+
+        p:first-child {
+            @extend %body;
+            margin-bottom: 4px;
+        }
+
+        p:last-child {
+            @extend %label;
+            font-weight: 900;
         }
     }
 }
