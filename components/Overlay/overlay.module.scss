@@ -16,7 +16,7 @@ $overlay-height: 90vh;
 
     padding: 24px;
     border-radius: 15px;
-    background-color: transparentize(white, .92);
+    background-color: $background--lightest;
     backdrop-filter: $backdropFilter;
     transition: transform $easing,
         opacity $easing,
