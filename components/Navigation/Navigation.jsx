@@ -2,7 +2,6 @@ import React, { useState, useRef, useContext } from 'react';
 import { AppContext } from '../AppContext';
 import styles from './Navigation.module.scss';
 import IconButton from '../iconButton';
-import Button from '../Button';
 import Image from 'next/image';
 import Badge from '../Badge';
 import Overlay from '../Overlay';
@@ -26,6 +25,19 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 setRoutineJournal(data);
                 // console.log(routineJournal);
             })
+    }
+
+    const renderJournalDates = ({ date }) => {
+        const thisTileDate = `${date.getMonth() + 1} ${date.getDate()}, ${date.getFullYear()}`;
+
+        for (let journalItem of routineJournal) {
+            if (thisTileDate === journalItem.pretty_date) {
+                return <div className={styles['Calendar__routine-log']}>
+                    <p>{date.getDate()}</p>
+                    <p>{journalItem.routine_name.substring(4)}</p>
+                </div>
+            }
+        }
     }
 
     return <div>
@@ -75,24 +87,12 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 sizing="hug"
                 buttonType="tertiary">
                     <Calendar
-                        prevLabel={<IconButton type="none" icon="/img/back.svg" />}
-                        nextLabel={<IconButton type="none" icon="/img/next.svg" />}
+                        prevLabel={<Image width="18px" height="18px" src="/img/back.svg" />}
+                        nextLabel={<Image width="18px" height="18px" src="/img/next.svg" />}
                         next2Label={null}
                         prev2Label={null}
                         maxDate={new Date()}
-                        tileContent={({ date }) => {
-                            const thisTileDate = `${date.getMonth() + 1} ${date.getDate()}, ${date.getFullYear()}`;
-
-                            for (let journalItem of routineJournal) {
-                                // console.log(journalItem.pretty_date)
-                                if (thisTileDate === journalItem.pretty_date) {
-                                    return <div className={styles['Calendar__routine_log']}>
-                                        <p>{date.getDate()}</p>
-                                        <p>{journalItem.routine_name.substring(4)}</p>
-                                    </div>
-                                }
-                            }
-                        }}
+                        tileContent={renderJournalDates}
                         tileDisabled={() => {return true}}
                         maxDetail="month"
                         />

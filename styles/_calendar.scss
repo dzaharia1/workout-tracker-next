@@ -1,0 +1,60 @@
+@import './utilities/manifest.module';
+@import '../node_modules/react-calendar/dist/Calendar.css';
+
+.react-calendar {
+    background: none !important;
+    border: none !important;
+
+    &__navigation__label__labelText {
+    @extend %h3;
+        color: $text--primary;
+
+        abbr {
+        text-decoration: none;
+        }
+    }
+
+    &__month-view__weekdays__weekday,
+    &__month-view__weekdays__weekday--current {
+        @extend %label;
+        color: $text--secondary;
+
+        abbr {
+        text-decoration: none;
+        }
+    }
+
+    &__tile {
+        @extend %vertical-center;
+        height: 58px;
+        // max-width: 36px !important;
+
+        &:disabled {
+            background-color: $background--lightest !important;
+            margin-bottom: 12px;
+        }
+
+        abbr {
+            @extend %body;
+            color: $text--secondary;
+        }
+
+        &--now {
+            @extend %elevation--low;
+            background: $background--lightest !important;
+            border-radius: 16px;
+            width: 36px;
+            height: 56px;
+            border-radius: 16px;
+            padding-top: 8px;
+            z-index: 1;
+
+            abbr {
+                @extend %vertical-center;
+                // position: absolute;
+                color: $text--primary !important;
+
+            }
+        }
+    }
+}

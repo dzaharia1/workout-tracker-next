@@ -22,7 +22,7 @@ $overlay-height: 90vh;
         opacity $easing,
         visibility $easing;
 
-    z-index: 2;
+    z-index: 3;
 
     &--fill {
         height: $overlay-height;
