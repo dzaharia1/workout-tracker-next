@@ -1,6 +1,5 @@
 @import './utilities/resets';
 @import './utilities/manifest.module';
-@import './utilities/manifest.module';
 
 $inter: 'Inter', helvetica, sans-serif;
 
@@ -54,54 +53,4 @@ main {
   max-width: $site-max-width;
 }
 
-@import '../node_modules/react-calendar/dist/Calendar.css';
-
-.react-calendar {
-  background: none !important;
-  border: none !important;
-  &__navigation__label__labelText {
-    @extend %h3;
-    color: $text--primary;
-
-    abbr {
-      text-decoration: none;
-    }
-  }
-
-  &__month-view__weekdays__weekday,
-  &__month-view__weekdays__weekday--current {
-    @extend %label;
-    color: $text--secondary;
-
-    abbr {
-      text-decoration: none;
-    }
-  }
-
-  &__tile {
-    @extend %vertical-center;
-    height: 58px;
-    
-    &:disabled {
-      background: none;
-      margin-bottom: 12px;
-    }
-
-    abbr {
-      @extend %body;
-      color: $text--secondary;
-    }
-
-    &--now {
-      @extend %elevation--tiny;
-      background: $background--lightest !important;
-      border-radius: 16px;
-      z-index: 1;
-      
-      abbr {
-        color: $text--primary !important;
-        font-weight: 800 !important;
-      }
-    }
-  }
-}
+@import './calendar';

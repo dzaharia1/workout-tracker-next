@@ -19,7 +19,6 @@ const Overlay = ({triggerIcon, title, id, sizing, buttonType, onShow, children})
     }
 
     return <div>
-        {/* <button className="overlay__trigger" onClick={showOverlay}></button> */}
         <IconButton icon={triggerIcon} clickHandler={showOverlay} type={buttonType} />
         <button className={`${styles["overlay__scrim"]} ${overlayVisible && styles["overlay__scrim--visible"]}`} id={id} onClick={hideOverlay}/>
         <div className={`${styles["overlay"]} ${styles[`overlay--${sizing}`]} ${overlayVisible && styles['overlay--visible']}`} id={id}>
