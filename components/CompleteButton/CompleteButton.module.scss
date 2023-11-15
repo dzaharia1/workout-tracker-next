@@ -7,6 +7,10 @@
     right: $padding;
     border-radius: 15px;
 
+    @media screen and (min-width: 620px) {
+        right: calc($wide-viewport-padding - 40px - ($padding * 2));
+    }
+
     &__confirm-mode {
         @extend %horizontal-center;
         gap: $padding;

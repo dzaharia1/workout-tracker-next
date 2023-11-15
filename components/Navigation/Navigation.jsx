@@ -82,7 +82,10 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
             </div>
             <Overlay
                 title="Journal"
-                onShow={loadRoutineJournal}
+                onShow={() => {
+                    loadRoutineJournal();
+                    setMenuVisible(false);
+                }}
                 triggerIcon="/img/journal.svg"
                 sizing="hug"
                 buttonType="tertiary">

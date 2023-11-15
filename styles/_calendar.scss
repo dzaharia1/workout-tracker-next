@@ -4,6 +4,7 @@
 .react-calendar {
     background: none !important;
     border: none !important;
+    width: 100%;
 
     &__navigation__label__labelText {
     @extend %h3;
@@ -27,7 +28,6 @@
     &__tile {
         @extend %vertical-center;
         height: 58px;
-        // max-width: 36px !important;
 
         &:disabled {
             background-color: $background--lightest !important;
@@ -40,14 +40,26 @@
         }
 
         &--now {
-            @extend %elevation--low;
-            background: $background--lightest !important;
-            border-radius: 16px;
-            width: 36px;
-            height: 56px;
-            border-radius: 16px;
-            padding-top: 8px;
-            z-index: 1;
+            // @extend %elevation--low;
+            // background: $background--lightest !important;
+            // border-radius: 16px;
+            // width: 36px;
+            // height: 56px;
+            // border-radius: 16px;
+            // padding-top: 8px;
+            // z-index: 1;
+
+            &:before {
+                @extend %elevation--low;
+                content: '';
+                position: absolute;
+
+                width: 36px;
+                height: 56px;
+                border-radius: 16px;
+
+                margin-top: -8px;
+            }
 
             abbr {
                 @extend %vertical-center;
