@@ -40,14 +40,6 @@
         }
 
         &--now {
-            // @extend %elevation--low;
-            // background: $background--lightest !important;
-            // border-radius: 16px;
-            // width: 36px;
-            // height: 56px;
-            // border-radius: 16px;
-            // padding-top: 8px;
-            // z-index: 1;
 
             &:before {
                 @extend %elevation--low;
