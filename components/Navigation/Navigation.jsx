@@ -21,22 +21,27 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
         const url = `${apiUrl}/routineJournal`;
         fetch(url)
             .then(response => response.json())
-            .then(data => {
-                setRoutineJournal(data);
-                // console.log(routineJournal);
-            })
+            .then(data => setRoutineJournal(data))
     }
 
     const renderJournalDates = ({ date }) => {
         const thisTileDate = `${date.getMonth() + 1} ${date.getDate()}, ${date.getFullYear()}`;
 
+        let routinesList = ``;
+
         for (let journalItem of routineJournal) {
             if (thisTileDate === journalItem.pretty_date) {
-                return <div className={styles['Calendar__routine-log']}>
-                    <p>{date.getDate()}</p>
-                    <p>{journalItem.routine_name.substring(4)}</p>
-                </div>
+                routinesList === '' ? 
+                    routinesList = `${journalItem.routine_name.substring(4)}` :
+                    routinesList += `, ${journalItem.routine_name.substring(4)}`
             }
+        }
+
+        if (routinesList.length != '') {
+            return <div className={styles['Calendar__routine-log']}>
+                <p>{date.getDate()}</p>
+                <p>{routinesList}</p>
+            </div>
         }
     }
 
