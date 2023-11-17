@@ -3,11 +3,15 @@ import { AppContext } from '../AppContext';
 import MovementCard from '../MovementCard';
 import styles from './setList.module.scss';
 import IconButton from '../iconButton';
+import LogoHeader from '../LogoHeader';
 
-const SetList = ({superSets}) => {
+const SetList = ({superSets, thisRoutine}) => {
     const {today} = useContext(AppContext);
 
     return <section className={styles["supersets"]}>
+        <div className={styles['supersets__logo-header']}>
+            <LogoHeader routine={thisRoutine.routine_name} />
+        </div>
         { superSets.map((superSet, i) => {
             return <div className={styles["super-set"]} key={i}>
                 <header className={styles["super-set__header"]}>

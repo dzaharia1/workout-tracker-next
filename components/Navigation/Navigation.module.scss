@@ -2,6 +2,29 @@
 @import '../SetList/setList.module.scss';
 
 .navigation {
+    @extend %vertical-start;
+
+    @media screen and (min-width: $breakpoint--tablet) {
+        position: fixed;
+        top: 0;
+        right: calc(((100vw - $site-max-width) / 2) + $site-max-width + $padding);
+        width: calc((100vw - $site-max-width) / 2 - ($padding * 2));
+        max-width: $site-max-width * .75;
+        height: 100vh;
+        padding: 0 $padding;
+
+        .navigation__logo-header {
+            display: flex;
+            width: calc(100% - (40px + ($padding * 2)));
+            margin-bottom: $padding;
+        }
+    }
+
+    &__logo-header {
+        @extend %vertical-start;
+        display: none;
+    }
+
     &__footer-bar {
         @extend %horizontal-center;
         @extend %elevation--high;
@@ -14,8 +37,12 @@
         background-color: $background--lightest;
         transition: box-shadow $easing;
 
-        @media screen and (min-width: 618px) {
+        @media screen and (min-width: $breakpoint--mobile) {
             padding: 0 $wide-viewport-padding;
+        }
+
+        @media screen and (min-width: $breakpoint--tablet) {
+            display: none;
         }
 
         &--menu-visible {
@@ -70,9 +97,21 @@
 
         z-index: 1000;
 
-        @media screen and (min-width: 620px) {
+        @media screen and (min-width: $breakpoint--mobile) {
             right: $wide-viewport-padding;
             left: $wide-viewport-padding;
+        }
+
+        @media screen and (min-width: $breakpoint--tablet) {
+            position: static;
+            bottom: unset;
+            left: unset;
+            right: unset;
+            width: 100%;
+            padding: 0;
+            margin-bottom: $padding * 2;
+            background: none;
+            opacity: 1;
         }
         
         &--visible {
@@ -85,7 +124,17 @@
             @extend %divider-below;
             @extend %horizontal-center;
             width: 100%;
-            padding: $padding 0;
+            padding: $padding 8px;
+
+            &--active:after {
+                position: absolute;
+                content: '';
+                width: 4px;
+                height: 30px;
+                margin-left: -8px;
+                border-radius: 4px;
+                background: $gradient--primary;
+            }
             
             &-header {
                 @extend %horizontal-end;
@@ -121,6 +170,19 @@
                 visibility: visible;
                 opacity: 1;
             }
+        }
+    }
+
+    &__calendar {
+        display: none;
+
+        h2 {
+            margin-bottom: $padding;
+        }
+
+        @media screen and (min-width: $breakpoint--tablet) {
+            display: block;
+            margin: $padding 0;
         }
     }
 }

@@ -3,6 +3,10 @@
 .header {
     width: 100%;
     padding: $padding;
+
+    @media screen and (min-width: $breakpoint--tablet) {
+        padding: $padding 0;
+    }
     
     &__card {
         @extend %horizontal-center;

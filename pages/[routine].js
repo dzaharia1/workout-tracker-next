@@ -65,13 +65,12 @@ export default function Home({ movements, routineData, thisRoutine, nextRoutine,
           <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
           <meta name="theme-color" content="#eeeeee"/>
         </Head>
-        <LogoHeader routine={thisRoutine.routine_name} />
-        <SetList superSets={superSets} />
-        <CompleteButton thisRoutine={thisRoutineLocal} />
+        <SetList superSets={superSets} thisRoutine={thisRoutine} />
         <Navigation thisRoutine={thisRoutineLocal}
           nextRoutine={nextRoutineLocal}
           routines={routineDataLocal}
           superSets={superSets} />
+        <CompleteButton thisRoutine={thisRoutineLocal} />
       </main>
     </AppContext.Provider>
   )

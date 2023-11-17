@@ -28,9 +28,10 @@
     &__tile {
         @extend %vertical-center;
         height: 58px;
+        background: none !important;
 
         &:disabled {
-            background-color: $background--lightest !important;
+            background-color: none !important;
             margin-bottom: 12px;
         }
 
@@ -40,7 +41,6 @@
         }
 
         &--now {
-
             &:before {
                 @extend %elevation--low;
                 content: '';
@@ -49,7 +49,6 @@
                 width: 36px;
                 height: 56px;
                 border-radius: 16px;
-
                 margin-top: -8px;
             }
 
