@@ -15,7 +15,7 @@ const SetList = ({superSets, thisRoutine}) => {
         { superSets.map((superSet, i) => {
             return <div className={styles["super-set"]} key={i}>
                 <header className={styles["super-set__header"]}>
-                    <h2>Superset {superSet.id}</h2>
+                    <h3>Superset {superSet.id}</h3>
                     <div className={styles['super-set__header-rule-line']}></div>
                     {superSet.movements.map((movement, i) => {
                         return <div className={movement.last_logged === today ? styles['super-set__complete-indicator--complete'] : styles['super-set__complete-indicator--to-do']} key={i}></div>

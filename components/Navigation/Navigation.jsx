@@ -107,7 +107,6 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
             </Overlay>
         </div>
         <div className={styles['navigation__calendar']}>
-            <h2>History</h2>
             <Calendar routineJournal={routineJournal} />
         </div>
     </div>
