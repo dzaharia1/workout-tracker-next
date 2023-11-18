@@ -59,6 +59,10 @@
         flex: 1;
         margin-left: 8px;
 
+        h1 {
+            @extend %h2;
+        }
+
         &-last-indicator {
             @extend %label;
             color: $text--secondary;
