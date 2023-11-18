@@ -11,7 +11,7 @@ const LogoHeader = ({routine}) => {
             <Image src="/img/logo.svg" width="24px" height="24px" />
             <h1>{routine}</h1>
             <div>
-                <p>{today}</p>
+                <p>Movements - {today}</p>
             </div>
         </div>
     </header>
