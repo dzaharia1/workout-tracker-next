@@ -26,6 +26,10 @@
   margin-bottom: $padding;
   margin-top: 12px;
 
+  @media screen and (min-width: $breakpoint--tablet) {
+    padding: 0 $padding 0 0;
+  }
+
   &__header {
     @extend %horizontal-center;
     width: 100%;

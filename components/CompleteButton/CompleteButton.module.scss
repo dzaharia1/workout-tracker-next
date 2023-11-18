@@ -12,8 +12,15 @@
     }
 
     @media screen and (min-width: $breakpoint--tablet) {
-        bottom: $padding;
-        right: calc((100vw - ($site-max-width + $navigation-max-width + $padding * 3)) / 2)
+        bottom: unset;
+        top: $padding;
+        left: unset;
+        right: calc(100vw - ($navigation-max-width - ($padding * 3)));
+    }
+    
+    @media screen and (min-width: calc($site-max-width + $navigation-max-width)) {
+        // left: calc((100vw - ($site-max-width + $navigation-max-width)) / 2 + ($navigation-max-width - ($padding * 4) - 48px));
+        right: calc(100vw - (((100vw - ($site-max-width + $navigation-max-width)) / 2) + ($navigation-max-width - ($padding * 3))));
     }
 
     &__confirm-mode {
