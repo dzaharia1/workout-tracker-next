@@ -12,10 +12,8 @@
     }
 
     @media screen and (min-width: $breakpoint--tablet) {
-        bottom: unset;
-        right: unset;
-        top: $padding;
-        right: calc(((100vw - $site-max-width) / 2) + $site-max-width + ($padding * 2));
+        bottom: $padding;
+        right: calc((100vw - ($site-max-width + $navigation-max-width + $padding * 3)) / 2)
     }
 
     &__confirm-mode {

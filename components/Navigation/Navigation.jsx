@@ -5,8 +5,9 @@ import IconButton from '../iconButton';
 import Image from 'next/image';
 import Badge from '../Badge';
 import Overlay from '../Overlay';
-import Calendar from 'react-calendar';
+import Calendar from '../Calendar';
 import LogoHeader from '../LogoHeader';
+import CompleteButton from '../CompleteButton';
 
 
 const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
@@ -102,31 +103,12 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                 triggerIcon="/img/journal.svg"
                 sizing="hug"
                 buttonType="tertiary">
-                    <Calendar
-                        prevLabel={<Image width="18px" height="18px" src="/img/back.svg" />}
-                        nextLabel={<Image width="18px" height="18px" src="/img/next.svg" />}
-                        next2Label={null}
-                        prev2Label={null}
-                        maxDate={new Date()}
-                        tileContent={renderJournalDates}
-                        tileDisabled={() => {return true}}
-                        maxDetail="month"
-                        />
+                    <Calendar routineJournal={routineJournal} />
             </Overlay>
         </div>
-
         <div className={styles['navigation__calendar']}>
             <h2>History</h2>
-            <Calendar
-                prevLabel={<Image width="18px" height="18px" src="/img/back.svg" />}
-                nextLabel={<Image width="18px" height="18px" src="/img/next.svg" />}
-                next2Label={null}
-                prev2Label={null}
-                maxDate={new Date()}
-                tileContent={renderJournalDates}
-                tileDisabled={() => {return true}}
-                maxDetail="month"
-                />
+            <Calendar routineJournal={routineJournal} />
         </div>
     </div>
 }

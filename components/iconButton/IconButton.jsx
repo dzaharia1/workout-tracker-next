@@ -6,7 +6,10 @@ const IconButton = ({icon, clickHandler, type, iconSize}) => {
         <button 
             className={styles[`icon-button--${type || `primary`}`]}
             onClick={clickHandler}>
-            <Image width={iconSize || `24px`} height={iconSize || `24px`} src={icon}></Image>
+            <Image
+                width={iconSize || `24px`}
+                height={iconSize || `24px`}
+                src={icon} />
         </button>
     </div>
 }

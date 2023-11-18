@@ -1,13 +1,12 @@
 @import './utilities/manifest.module';
 
-.container {
+main {
   @extend %vertical-center;
   width: 100%;
 
   @media screen and (min-width: $breakpoint--tablet) {
     flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
   }
 }
 
