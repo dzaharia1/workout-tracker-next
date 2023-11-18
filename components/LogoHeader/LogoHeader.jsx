@@ -9,9 +9,9 @@ const LogoHeader = ({routine}) => {
     return <header className={styles['header']}>
         <div className={styles['header__card']}>
             <Image src="/img/logo.svg" width="24px" height="24px" />
-            <h1>Movements</h1>
+            <h1>{routine}</h1>
             <div>
-                <p>{routine} - {today}</p>
+                <p>{today}</p>
             </div>
         </div>
     </header>

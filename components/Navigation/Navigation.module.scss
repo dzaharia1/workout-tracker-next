@@ -2,6 +2,33 @@
 @import '../SetList/setList.module.scss';
 
 .navigation {
+    @extend %vertical-start;
+
+    @media screen and (min-width: $breakpoint--tablet) {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        max-width: $navigation-max-width;
+        margin-right: $padding * 3;
+        margin-left: $padding;
+
+        .navigation__logo-header {
+            display: flex;
+            // width: calc(100% - (40px + ($padding * 2)));
+            width: 100%;
+            margin-bottom: $padding;
+
+            header {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    &__logo-header {
+        @extend %vertical-start;
+        display: none;
+    }
+
     &__footer-bar {
         @extend %horizontal-center;
         @extend %elevation--high;
@@ -13,9 +40,14 @@
         height: $header-height;
         background-color: $background--lightest;
         transition: box-shadow $easing;
+        z-index: 1;
 
-        @media screen and (min-width: 618px) {
+        @media screen and (min-width: $breakpoint--mobile) {
             padding: 0 $wide-viewport-padding;
+        }
+
+        @media screen and (min-width: $breakpoint--tablet) {
+            display: none;
         }
 
         &--menu-visible {
@@ -70,9 +102,22 @@
 
         z-index: 1000;
 
-        @media screen and (min-width: 620px) {
+        @media screen and (min-width: $breakpoint--mobile) {
             right: $wide-viewport-padding;
             left: $wide-viewport-padding;
+        }
+
+        @media screen and (min-width: $breakpoint--tablet) {
+            position: static;
+            bottom: unset;
+            left: unset;
+            right: unset;
+            flex: 1;
+            width: 100%;
+            padding: 0;
+            margin-bottom: $padding * 2;
+            background: none;
+            opacity: 1;
         }
         
         &--visible {
@@ -85,7 +130,17 @@
             @extend %divider-below;
             @extend %horizontal-center;
             width: 100%;
-            padding: $padding 0;
+            padding: $padding 8px;
+
+            &--active:after {
+                position: absolute;
+                content: '';
+                width: 4px;
+                height: 30px;
+                margin-left: -8px;
+                border-radius: 4px;
+                background: $gradient--primary;
+            }
             
             &-header {
                 @extend %horizontal-end;
@@ -123,28 +178,17 @@
             }
         }
     }
-}
 
-.Calendar {
-    &__routine-log {
-        @extend %vertical-center;
-        @extend %label;
-        justify-content: center;
-        color: $background--lightest;
-        background: $gradient--primary;
-        min-width: 36px;
-        border-radius: 17px;
-        padding: 8px 8px;
-        margin-top: -26px;
+    &__calendar {
+        display: none;
 
-        p:first-child {
-            @extend %body;
-            margin-bottom: 4px;
+        h2 {
+            margin-bottom: $padding;
         }
 
-        p:last-child {
-            @extend %body--strong;
-            width: max-content;
+        @media screen and (min-width: $breakpoint--tablet) {
+            display: block;
+            margin: $padding 0;
         }
     }
 }

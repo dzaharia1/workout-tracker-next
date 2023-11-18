@@ -47,10 +47,4 @@ p {
   @extend %body;
 }
 
-main {
-  @extend %vertical-center;
-  width: 100%;
-  max-width: $site-max-width;
-}
-
 @import './calendar';

@@ -3,7 +3,20 @@
 .supersets {
   @extend %vertical-start;
   width: 100%;
+  max-width: $site-max-width;
   margin-bottom: $header-height + (3 * $padding);
+
+  @media screen and (min-width: $breakpoint--tablet) {
+    padding: $padding 0;
+    margin-bottom: $padding + 40px;
+    .supersets__logo-header {
+      display: none;
+    }
+  }
+
+  &__logo-header {
+    width: 100%;
+  }
 }
 
 .super-set {
@@ -18,7 +31,7 @@
     width: 100%;
     margin-bottom: 24px;
 
-    h2 {
+    h3 {
       margin-right: 12px;
     }
   }
