@@ -13,14 +13,13 @@
 
     @media screen and (min-width: $breakpoint--tablet) {
         bottom: unset;
-        top: $padding;
+        top: $padding * 3;
         left: unset;
-        right: calc(100vw - ($navigation-max-width - ($padding * 3)));
+        right: calc(100vw - ($navigation-max-width) + $padding);
     }
     
-    @media screen and (min-width: calc($site-max-width + $navigation-max-width)) {
-        // left: calc((100vw - ($site-max-width + $navigation-max-width)) / 2 + ($navigation-max-width - ($padding * 4) - 48px));
-        right: calc(100vw - (((100vw - ($site-max-width + $navigation-max-width)) / 2) + ($navigation-max-width - ($padding * 3))));
+    @media screen and (min-width: calc($site-max-width + $navigation-max-width) + 50px) {
+        right: calc(100vw - (((100vw - ($site-max-width + $navigation-max-width)) / 2) + ($navigation-max-width - ($padding * 2.5))));
     }
 
     &__confirm-mode {

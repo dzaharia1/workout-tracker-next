@@ -6,11 +6,14 @@
 
     @media screen and (min-width: $breakpoint--tablet) {
         position: sticky;
-        top: 0;
-        height: 100vh;
+        top: $padding;
         max-width: $navigation-max-width;
-        padding-right: $padding * 3;
-        padding-left: $padding;
+        margin-top: $padding;
+        margin-right: $padding * 3;
+        padding: $padding;
+        // background-color: $background--lightest;
+        background-color: darken($background--base, 3);
+        border-radius: 16px;
 
         .navigation__logo-header {
             display: flex;
