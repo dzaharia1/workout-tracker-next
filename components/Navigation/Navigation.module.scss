@@ -10,6 +10,7 @@
         max-width: $navigation-max-width;
         margin-top: $padding;
         margin-right: $padding * 3;
+        margin-left: $padding;
         padding: $padding;
         // background-color: $background--lightest;
         background-color: darken($background--base, 3);
