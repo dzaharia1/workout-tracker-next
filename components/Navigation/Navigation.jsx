@@ -69,6 +69,7 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
                             <p className={styles['navigation__title-last-indicator']}>last: {routine.last_logged}</p>}
                     </a>
                     {nextRoutine.routine_id == routine.routine_id && <Badge type="on-deck"/>}
+                    {routine.skipped && <Badge type="skipped" /> }
                 </li>
             })}
         </ul>

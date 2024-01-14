@@ -44,7 +44,20 @@
         @extend .badge;
 
         div {
-            @extend %background--secondary;
+            @extend %background--primary;
+        }
+
+        .badge__label {
+            color: $background--lightest;
+            margin: 0;
+        }
+    }
+
+    &--skipped {
+        @extend .badge;
+
+        div {
+            @extend %background--secondary
         }
 
         .badge__label {
