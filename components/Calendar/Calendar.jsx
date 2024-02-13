@@ -25,8 +25,8 @@ const Calendar = ({routineJournal}) => {
     }
 
     return <ReactCalendar
-                prevLabel={<Image width="18px" height="18px" src="/img/back.svg" />}
-                nextLabel={<Image width="18px" height="18px" src="/img/next.svg" />}
+                prevLabel={<Image width="18" height="18" src="/img/back.svg" />}
+                nextLabel={<Image width="18" height="18" src="/img/next.svg" />}
                 next2Label={null}
                 prev2Label={null}
                 maxDate={new Date()}

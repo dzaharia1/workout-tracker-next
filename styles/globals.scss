@@ -1,14 +1,14 @@
-@import './utilities/resets';
 @import './utilities/manifest.module';
+@import './utilities/resets';
 
-$inter: 'Atkinson Hyperlegible', helvetica, sans-serif;
+$Atkinson: 'Atkinson Hyperlegible', helvetica, sans-serif;
 
 html,
 body {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: $inter;
+  font-family: $Atkinson;
   color: black;
 
   #__next {

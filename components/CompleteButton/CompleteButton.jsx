@@ -36,7 +36,7 @@ const CompleteButton = ({ thisRoutine }) => {
                 icon="/img/complete.svg" 
                 type="complete" 
                 label="complete"
-                iconSize="40px"
+                iconSize="40"
                 clickHandler={unMarkRoutineCompleted} /> :
             confirmMode ?
                 <div className={styles['complete-button__confirm-mode']}>
@@ -44,18 +44,18 @@ const CompleteButton = ({ thisRoutine }) => {
                         icon="/img/complete--white.svg"
                         type="primary"
                         label="mark complete?"
-                        iconSize="40px"
+                        iconSize="40"
                         clickHandler={markRoutineCompleted} />
                     <IconButton
                         icon="/img/close.svg"
                         type="tertiary"
-                        iconSize="40px"
+                        iconSize="40"
                         clickHandler={() => setConfirmMode(false)} />
                 </div> :
                 <IconButton
                     icon="/img/complete--white.svg"
                     type="primary"
-                    iconSize="40px"
+                    iconSize="40"
                     clickHandler={() => setConfirmMode(true)}/>
         }
     </div>

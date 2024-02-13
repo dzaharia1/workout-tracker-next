@@ -8,7 +8,7 @@ const LogoHeader = ({routine}) => {
 
     return <header className={styles['header']}>
         <div className={styles['header__card']}>
-            <Image src="/img/logo.svg" width="24px" height="24px" />
+            <Image src="/img/logo.svg" width="24" height="24" />
             <h1>{routine}</h1>
             <div>
                 <p>Movements - {today}</p>
