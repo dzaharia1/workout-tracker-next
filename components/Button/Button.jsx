@@ -12,7 +12,7 @@ const Button = ({label, clickHandler, additionalClass, iconSize, type, icon, id}
             className={`${styles[`button--${type || `primary`}`]} ${additionalClass}`}
             onClick={click}
             id={id}>
-                { icon && <Image src={icon} width={iconSize || `24px`} height={iconSize || `24px`} />}
+                { icon && <Image src={icon} width={iconSize || `24`} height={iconSize || `24`} />}
                 <p style={{height: iconSize}}>{ label }</p>
         </button>
     </div>

@@ -76,8 +76,8 @@ const Navigation = ({thisRoutine, routines, nextRoutine, superSets}) => {
         <div className={`${styles['navigation__footer-bar']} ${menuVisible && styles['navigation__footer-bar--menu-visible']}`}>
             <Image
                 src={menuVisible? `/img/expand.svg` : "/img/menu.svg"}
-                width="24px"
-                height="24px"
+                width="24"
+                height="24"
                 onClick={toggleMenu} />
             <div className={styles['navigation__title']} onClick={toggleMenu}>
                 <h1>{thisRoutine.routine_name}</h1>
